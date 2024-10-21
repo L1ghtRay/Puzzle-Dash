@@ -14,18 +14,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Main extends ApplicationAdapter {
     OrthographicCamera camera;
     SpriteBatch batch;
     Sprite sprite;
-    Stage stage;   // Add a stage for the button
+    Stage stage; // Stage for the button
     Texture buttonTexture; // Texture for the button
     ImageButton button; // Use ImageButton instead of TextButton
 
     @Override
     public void create() {
-        // Create camera and sprite as before
+        // Create camera and sprite
         camera = new OrthographicCamera();
         batch = new SpriteBatch();
         sprite = new Sprite(new Texture("main-menu.png"));
@@ -37,11 +38,28 @@ public class Main extends ApplicationAdapter {
         Gdx.input.setInputProcessor(stage); // Direct input events to the stage
 
         // Load the button texture
-        buttonTexture = new Texture("play_button.png"); // Replace with your button image file
-        TextureRegionDrawable buttonDrawable = new TextureRegionDrawable(buttonTexture);
+        buttonTexture = new Texture("play-button.png"); // Replace with your button image file
+
+        // Create a TextureRegion from the button texture
+        TextureRegion buttonRegion = new TextureRegion(buttonTexture);
+
+        // Set the desired size for the button image
+        int newWidth = 35; // Desired width for the image
+        int newHeight = 25; // Desired height for the image
+
+        // Create a TextureRegionDrawable with the scaled region
+        TextureRegionDrawable buttonDrawable = new TextureRegionDrawable(buttonRegion);
+
+        // Set the region size to the new size
+        buttonDrawable.getRegion().setRegionWidth(newWidth);
+        buttonDrawable.getRegion().setRegionHeight(newHeight);
+
+        // Create the ImageButton with the drawable
         button = new ImageButton(buttonDrawable);
-        button.setSize(800, 400);
-        button.setPosition(300, 100);  // Position at bottom center
+
+        // Set the button size to keep the button area unchanged
+        button.setSize(600, 300); // This size is the clickable area
+        button.setPosition(55, 140); // Position at desired coordinates
 
         // Add click listener to the button
         button.addListener(new ClickListener() {
@@ -75,6 +93,6 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         stage.dispose();
-        buttonTexture.dispose();  // Dispose of the button texture when done
+        buttonTexture.dispose(); // Dispose of the button texture when done
     }
 }
