@@ -37,11 +37,11 @@ public class Main extends ApplicationAdapter {
         Gdx.input.setInputProcessor(stage); // Direct input events to the stage
 
         // Load the button texture
-        buttonTexture = new Texture("play_button.png"); // Replace with your button image file
+        buttonTexture = new Texture("play-button.png"); // Replace with your button image file
         TextureRegionDrawable buttonDrawable = new TextureRegionDrawable(buttonTexture);
         button = new ImageButton(buttonDrawable);
-        button.setSize(800, 400);
-        button.setPosition(300, 100);  // Position at bottom center
+        button.setSize(500, 300);
+        button.setPosition(55, 140);  // Position at bottom center
 
         // Add click listener to the button
         button.addListener(new ClickListener() {
