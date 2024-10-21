@@ -145,9 +145,13 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
+        // Dispose of the button texture when done
         batch.dispose();
         stage.dispose();
         mainmenuTexture.dispose();
-        playbuttonTexture.dispose(); // Dispose of the button texture when done
+        playbuttonTexture.dispose();
+        levelbuttonTexture.dispose();
+        creditsbuttonTexture.dispose();
+        exitbuttonTexture.dispose();
     }
 }
