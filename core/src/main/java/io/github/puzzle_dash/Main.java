@@ -15,64 +15,117 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
 public class Main extends ApplicationAdapter {
-    OrthographicCamera camera;
     SpriteBatch batch;
-    Sprite sprite;
+    //sprites
+    Sprite mainmenusprite;
+    Sprite playbuttonsprite;
+    Sprite levelbuttonsprite;
+    Sprite creditsbuttonsprite;
+    Sprite exitbuttonsprite;
+    Texture mainmenuTexture;
     Stage stage; // Stage for the button
-    Texture buttonTexture; // Texture for the button
-    ImageButton button; // Use ImageButton instead of TextButton
+    //buttons
+    Texture playbuttonTexture;
+    ImageButton button1;
+    Texture levelbuttonTexture;
+    ImageButton button2;
+    Texture creditsbuttonTexture;
+    ImageButton button3;
+    Texture exitbuttonTexture;
+    ImageButton button4;
 
     @Override
     public void create() {
-        // Create camera and sprite
-        camera = new OrthographicCamera();
+        // Create sprite
+        mainmenuTexture = new Texture("main-menu.png");
         batch = new SpriteBatch();
-        sprite = new Sprite(new Texture("main-menu.png"));
-        sprite.setPosition(0, 0);
-        sprite.setSize(640, 480);
 
-        // Set up the stage and input processor
+
+        mainmenusprite = new Sprite(mainmenuTexture);
+        mainmenusprite.setPosition(0, 0);
+        mainmenusprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Use screen dimensions
+
+        // Set up the stage and input processor?????
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage); // Direct input events to the stage
 
-        // Load the button texture
-        buttonTexture = new Texture("play-button.png"); // Replace with your button image file
-
-        // Create a TextureRegion from the button texture
-        TextureRegion buttonRegion = new TextureRegion(buttonTexture);
-
-        // Set the desired size for the button image
-        int newWidth = 35; // Desired width for the image
-        int newHeight = 25; // Desired height for the image
-
-        // Create a TextureRegionDrawable with the scaled region
-        TextureRegionDrawable buttonDrawable = new TextureRegionDrawable(buttonRegion);
-
-        // Set the region size to the new size
-        buttonDrawable.getRegion().setRegionWidth(newWidth);
-        buttonDrawable.getRegion().setRegionHeight(newHeight);
-
-        // Create the ImageButton with the drawable
-        button = new ImageButton(buttonDrawable);
-
-        // Set the button size to keep the button area unchanged
-        button.setSize(600, 300); // This size is the clickable area
-        button.setPosition(55, 140); // Position at desired coordinates
+        // Play button texture
+        playbuttonTexture = new Texture("play-button.png");
+        playbuttonsprite = new Sprite(playbuttonTexture);
+        TextureRegion buttonRegion1 = new TextureRegion(playbuttonTexture);
+        TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(buttonRegion1);
+        button1 = new ImageButton(buttonDrawable1);
+        button1.setSize(180, 81);
+        button1.setPosition(708, 404);
 
         // Add click listener to the button
-        button.addListener(new ClickListener() {
+        button1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("Button", "Start Game Button Clicked!");
-                // Here you can add code to start the game or transition to another screen
+                // Add code to start the game or transition to another screen
+            }
+        });
+        // level button texture
+        levelbuttonTexture = new Texture("level-button.png");
+        levelbuttonsprite = new Sprite(levelbuttonTexture);
+        TextureRegion buttonRegion2 = new TextureRegion(levelbuttonTexture);
+        TextureRegionDrawable buttonDrawable2 = new TextureRegionDrawable(buttonRegion2);
+        button2 = new ImageButton(buttonDrawable2);
+        button2.setSize(209, 84);
+        button2.setPosition(698, 313);
+
+        // Add click listener to the button
+        button2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("Button", "Start Level Button Clicked!");
+                // Add code to start the game or transition to another screen
+            }
+        });
+        // credits button texture
+        creditsbuttonTexture = new Texture("credits-button.png");
+        creditsbuttonsprite = new Sprite(creditsbuttonTexture);
+        TextureRegion buttonRegion3 = new TextureRegion(creditsbuttonTexture);
+        TextureRegionDrawable buttonDrawable3 = new TextureRegionDrawable(buttonRegion3);
+        button3 = new ImageButton(buttonDrawable3);
+        button3.setSize(277, 85);
+        button3.setPosition(659, 224);
+
+        // Add click listener to the button
+        button3.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("Button", "Open Credits Button Clicked!");
+                // Add code to start the game or transition to another screen
+            }
+        });
+        //exit button texture
+        exitbuttonTexture = new Texture("exit-button.png");
+        exitbuttonsprite = new Sprite(exitbuttonTexture);
+        TextureRegion buttonRegion4 = new TextureRegion(exitbuttonTexture);
+        TextureRegionDrawable buttonDrawable4 = new TextureRegionDrawable(buttonRegion4);
+        button4 = new ImageButton(buttonDrawable4);
+        button4.setSize(181, 82);
+        button4.setPosition(708, 138);
+
+        // Add click listener to the button
+        button4.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("Button", "Exit Game Button Clicked!");
+                // Add code to start the game or transition to another screen
             }
         });
 
         // Add the button to the stage
-        stage.addActor(button);
+        stage.addActor(button1);
+        stage.addActor(button2);
+        stage.addActor(button3);
+        stage.addActor(button4);
     }
+
 
     @Override
     public void render() {
@@ -81,7 +134,8 @@ public class Main extends ApplicationAdapter {
 
         // Draw the sprite (background)
         batch.begin();
-        sprite.draw(batch);
+        mainmenusprite.draw(batch);
+
         batch.end();
 
         // Draw the stage (button)
@@ -93,6 +147,7 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         stage.dispose();
-        buttonTexture.dispose(); // Dispose of the button texture when done
+        mainmenuTexture.dispose();
+        playbuttonTexture.dispose(); // Dispose of the button texture when done
     }
 }
