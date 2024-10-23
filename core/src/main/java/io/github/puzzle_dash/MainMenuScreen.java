@@ -122,7 +122,8 @@ public class MainMenuScreen implements Screen {
         button4.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Button", "Exit Game Button Clicked!");
+//                Gdx.app.log("Button", "Exit Game Button Clicked!");
+                System.out.println("Exit Game Button Clicked!");
                 Gdx.app.exit(); // Exit the application
             }
         });
