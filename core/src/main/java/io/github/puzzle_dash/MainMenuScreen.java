@@ -63,7 +63,8 @@ public class MainMenuScreen implements Screen {
         button1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Button", "Start Game Button Clicked!");
+//                Gdx.app.log("Button", "Start Game Button Clicked!");
+                System.out.println("Start Game Button Clicked!");
                 // Add code to start the game or transition to another screen
             }
         });
@@ -81,7 +82,8 @@ public class MainMenuScreen implements Screen {
         button2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Button", "Start Level Button Clicked!");
+//                Gdx.app.log("Button", "Start Level Button Clicked!");
+                System.out.println("Start Level Button Clicked!");
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new LevelsScreen(batch));
                 dispose();
@@ -101,7 +103,8 @@ public class MainMenuScreen implements Screen {
         button3.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Button", "Open Credits Button Clicked!");
+//                Gdx.app.log("Button", "Open Credits Button Clicked!");
+                System.out.println("Open Credits Button Clicked!");
                 // Add code to start the game or transition to another screen
             }
         });
@@ -176,7 +179,7 @@ public class MainMenuScreen implements Screen {
 
     public void dispose() {
         // Dispose of textures and other resources when done
-        batch.dispose();
+//        batch.dispose();
         stage.dispose();
         mainmenuTexture.dispose();
         playbuttonTexture.dispose();
