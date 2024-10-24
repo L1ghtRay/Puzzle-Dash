@@ -10,7 +10,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.puzzle_dash.Hud;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
@@ -24,11 +23,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
  class Hud implements Disposable {
     public Stage stage;
-    private Viewport viewport;
+    Viewport viewport;
 
-    private Integer worldTimer;
-    private float timeCount;
-    private Integer score;
+    Integer worldTimer;
+    float timeCount;
+    Integer score;
 
     Label countdownLabel;
     Label scoreLabel;
