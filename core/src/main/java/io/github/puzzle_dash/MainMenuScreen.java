@@ -48,7 +48,7 @@ public class MainMenuScreen implements Screen {
 
         // Set up the stage and input processor
         stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage); // Direct input events to the stage
+        Gdx.input.setInputProcessor(stage);
 
         // Play button texture
         playbuttonTexture = new Texture("play-button.png");
@@ -59,12 +59,13 @@ public class MainMenuScreen implements Screen {
         button1.setSize(180, 81);
         button1.setPosition(708, 404);
 
-        // Add click listener to the play button
         button1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 //                Gdx.app.log("Button", "Start Game Button Clicked!");
                 System.out.println("Start Game Button Clicked!");
+                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game.setScreen(new Level1(batch));
                 // Add code to start the game or transition to another screen
             }
         });
@@ -78,7 +79,6 @@ public class MainMenuScreen implements Screen {
         button2.setSize(209, 84);
         button2.setPosition(698, 313);
 
-        // Add click listener to the level button
         button2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -99,13 +99,14 @@ public class MainMenuScreen implements Screen {
         button3.setSize(277, 85);
         button3.setPosition(659, 224);
 
-        // Add click listener to the credits button
         button3.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 //                Gdx.app.log("Button", "Open Credits Button Clicked!");
                 System.out.println("Open Credits Button Clicked!");
-                // Add code to start the game or transition to another screen
+//                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+//                game.setScreen(new CreditsScreen(batch));
+//                dispose();
             }
         });
 
@@ -118,7 +119,7 @@ public class MainMenuScreen implements Screen {
         button4.setSize(181, 82);
         button4.setPosition(708, 138);
 
-        // Add click listener to the exit button
+
         button4.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

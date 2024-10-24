@@ -50,7 +50,9 @@ public class LevelsScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 //Gdx.app.log("Button", "Level Editor Button Clicked!");
                 System.out.println("Level Editor Button Clicked!");
-
+                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game.setScreen(new Level1(batch));
+                dispose();
                 // Add code to start the game or transition to another screen
             }
         });
