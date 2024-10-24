@@ -81,7 +81,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
     }
 }
 
-
 public class Level1 implements Screen {
     PuzzleDashGame game;
     OrthographicCamera camera;
