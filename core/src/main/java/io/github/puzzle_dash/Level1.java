@@ -78,6 +78,7 @@ class Hud implements Disposable {
 
 public class Level1 implements Screen {
     PuzzleDashGame game;
+
     OrthographicCamera camera;
     Viewport gamePort;
     Hud hud;
