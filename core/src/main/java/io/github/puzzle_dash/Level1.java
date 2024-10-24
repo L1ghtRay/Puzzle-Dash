@@ -84,14 +84,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 
 public class Level1 implements Screen {
-    private PuzzleDashGame game;
-    private OrthographicCamera gamecam;
-    private Viewport gamePort;
-    private Hud hud;
+    PuzzleDashGame game;
+    OrthographicCamera gamecam;
+    Viewport gamePort;
+    Hud hud;
 
-    private TmxMapLoader mapLoader;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
+    TmxMapLoader mapLoader;
+    TiledMap map;
+    OrthogonalTiledMapRenderer renderer;
 
 
 
