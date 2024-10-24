@@ -81,18 +81,18 @@ public class Level1 implements Screen {
     OrthographicCamera camera;
     Viewport gamePort;
     Hud hud;
-
+    SpriteBatch batch;
     TmxMapLoader mapLoader;
     TiledMap map;
     OrthogonalTiledMapRenderer renderer;
 
 
 
-    public Level1(PuzzleDashGame game) {
-        this.game = game;
+    public Level1(SpriteBatch batch) {
+        this.batch= batch;
         camera = new OrthographicCamera();
         gamePort = new FitViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, camera);
-        hud = new Hud(game.batch);
+        hud = new Hud(this.batch);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("tutorial-room.tmx");
