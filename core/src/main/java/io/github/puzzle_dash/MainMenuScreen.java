@@ -104,9 +104,9 @@ public class MainMenuScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
 //                Gdx.app.log("Button", "Open Credits Button Clicked!");
                 System.out.println("Open Credits Button Clicked!");
-//                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-//                game.setScreen(new CreditsScreen(batch));
-//                dispose();
+                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game.setScreen(new CreditsScreen(batch));
+                dispose();
             }
         });
 
