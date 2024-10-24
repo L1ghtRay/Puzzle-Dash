@@ -85,7 +85,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class Level1 implements Screen {
     PuzzleDashGame game;
-    OrthographicCamera gamecam;
+    OrthographicCamera camera;
     Viewport gamePort;
     Hud hud;
 
@@ -97,26 +97,26 @@ public class Level1 implements Screen {
 
     public Level1(PuzzleDashGame game) {
         this.game = game;
-        gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, gamecam);
+        camera = new OrthographicCamera();
+        gamePort = new FitViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, camera);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("tutorial-room.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
-        gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+        camera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
     }
 
     public void handleInput(float dt) {
         if (Gdx.input.isTouched()) {
-            gamecam.position.x += 100 * dt;
+            camera.position.x += 100 * dt;
         }
     }
 
     public void update(float dt) {
         handleInput(dt);
-        gamecam.update();
-        renderer.setView(gamecam);
+        camera.update();
+        renderer.setView(camera);
     }
 
     @Override
