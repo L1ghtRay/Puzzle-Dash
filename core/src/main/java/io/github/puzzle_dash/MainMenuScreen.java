@@ -36,11 +36,13 @@ public class MainMenuScreen implements Screen {
     Texture exitbuttonTexture;
     ImageButton button4;
 
+
     MainMenuScreen(final PuzzleDashGame game) {
         this.game = game;
 
         mainmenuTexture = new Texture("main-menu.png");
         batch = new SpriteBatch();
+
 
         mainmenusprite = new Sprite(mainmenuTexture);
         mainmenusprite.setPosition(0, 0);
@@ -76,8 +78,8 @@ public class MainMenuScreen implements Screen {
         TextureRegion buttonRegion2 = new TextureRegion(levelbuttonTexture);
         TextureRegionDrawable buttonDrawable2 = new TextureRegionDrawable(buttonRegion2);
         button2 = new ImageButton(buttonDrawable2);
-        button2.setSize(209, 84);
         button2.setPosition(698, 313);
+        button2.setSize(209, 84);
 
         button2.addListener(new ClickListener() {
             @Override
@@ -149,6 +151,7 @@ public class MainMenuScreen implements Screen {
 
         batch.end();
 
+
         // Draw the stage (buttons)
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
@@ -188,5 +191,6 @@ public class MainMenuScreen implements Screen {
         levelbuttonTexture.dispose();
         creditsbuttonTexture.dispose();
         exitbuttonTexture.dispose();
+
     }
 }
