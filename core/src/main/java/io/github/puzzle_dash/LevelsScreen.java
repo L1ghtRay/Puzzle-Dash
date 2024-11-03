@@ -44,7 +44,7 @@ public class LevelsScreen implements Screen {
         TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(buttonRegion5);
         button5 = new ImageButton(buttonDrawable5);
         button5.setSize(330, 83);
-        button5.setPosition(795, 220);
+        button5.setPosition(795, 222);
         button5.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -62,7 +62,7 @@ public class LevelsScreen implements Screen {
         TextureRegionDrawable buttonDrawable6 = new TextureRegionDrawable(buttonRegion6);
         button6 = new ImageButton(buttonDrawable6);
         button6.setSize(139, 83);
-        button6.setPosition(890, 114);
+        button6.setPosition(890, 116);
         button6.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

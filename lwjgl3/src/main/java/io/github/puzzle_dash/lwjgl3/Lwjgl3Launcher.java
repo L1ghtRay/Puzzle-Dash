@@ -9,7 +9,8 @@ public class Lwjgl3Launcher {
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setTitle("Puzzle Dash");
-        config.setWindowedMode(1920, 1080);
+        //config.setWindowedMode(1920, 1080);
+        config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
         new Lwjgl3Application(new PuzzleDashGame(), config);
         config.useVsync(true);
         config.setWindowIcon("puzzle_dash128.png", "puzzle_dash64.png", "puzzle_dash32.png", "puzzle_dash16.png");
