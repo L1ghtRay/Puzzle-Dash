@@ -36,13 +36,11 @@ public class MainMenuScreen implements Screen {
     Texture exitbuttonTexture;
     ImageButton button4;
 
-
     MainMenuScreen(final PuzzleDashGame game) {
         this.game = game;
 
         mainmenuTexture = new Texture("main-menu.png");
         batch = new SpriteBatch();
-
 
         mainmenusprite = new Sprite(mainmenuTexture);
         mainmenusprite.setPosition(0, 0);
@@ -53,13 +51,13 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         // Play button texture
-        playbuttonTexture = new Texture("play-button.png");
+        playbuttonTexture = new Texture("play-button (2).png");
         playbuttonsprite = new Sprite(playbuttonTexture);
         TextureRegion buttonRegion1 = new TextureRegion(playbuttonTexture);
         TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(buttonRegion1);
         button1 = new ImageButton(buttonDrawable1);
-        button1.setSize(180, 81);
-        button1.setPosition(708, 404);
+        button1.setSize(149, 82);
+        button1.setPosition(885, 477);
 
         button1.addListener(new ClickListener() {
             @Override
@@ -78,8 +76,8 @@ public class MainMenuScreen implements Screen {
         TextureRegion buttonRegion2 = new TextureRegion(levelbuttonTexture);
         TextureRegionDrawable buttonDrawable2 = new TextureRegionDrawable(buttonRegion2);
         button2 = new ImageButton(buttonDrawable2);
-        button2.setPosition(698, 313);
         button2.setSize(209, 84);
+        button2.setPosition(858, 385);
 
         button2.addListener(new ClickListener() {
             @Override
@@ -99,7 +97,7 @@ public class MainMenuScreen implements Screen {
         TextureRegionDrawable buttonDrawable3 = new TextureRegionDrawable(buttonRegion3);
         button3 = new ImageButton(buttonDrawable3);
         button3.setSize(277, 85);
-        button3.setPosition(659, 224);
+        button3.setPosition(819, 294);
 
         button3.addListener(new ClickListener() {
             @Override
@@ -119,7 +117,7 @@ public class MainMenuScreen implements Screen {
         TextureRegionDrawable buttonDrawable4 = new TextureRegionDrawable(buttonRegion4);
         button4 = new ImageButton(buttonDrawable4);
         button4.setSize(181, 82);
-        button4.setPosition(708, 138);
+        button4.setPosition(863, 203);
 
 
         button4.addListener(new ClickListener() {
@@ -150,7 +148,6 @@ public class MainMenuScreen implements Screen {
         mainmenusprite.draw(batch);
 
         batch.end();
-
 
         // Draw the stage (buttons)
         stage.act(Gdx.graphics.getDeltaTime());
@@ -191,6 +188,5 @@ public class MainMenuScreen implements Screen {
         levelbuttonTexture.dispose();
         creditsbuttonTexture.dispose();
         exitbuttonTexture.dispose();
-
     }
 }
