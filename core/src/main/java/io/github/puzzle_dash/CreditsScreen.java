@@ -12,57 +12,58 @@ public class CreditsScreen implements Screen {
     SpriteBatch batch;
     Texture creditsTexture;
     Sprite creditsSprite;
-    public CreditsScreen(SpriteBatch batch)
-    {
-       this.batch=batch;
-       creditsTexture =new Texture("credits.png");
-       creditsSprite =new Sprite(creditsTexture);
-       creditsSprite.setPosition(0,0);
-       creditsSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    TextScreen text;
+
+    public CreditsScreen(SpriteBatch batch) {
+        this.batch = batch;
+
+        // Load background image
+        creditsTexture = new Texture("credits.png");
+        creditsSprite = new Sprite(creditsTexture);
+        creditsSprite.setPosition(0, 0);
+        creditsSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        // Initialize TextScreen with the batch to render text
+        text = new TextScreen(batch);
     }
+
     @Override
     public void render(float delta) {
-
         // Clear the screen
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
 
-        // Draw the sprite (background)
+        // Begin drawing
         batch.begin();
+
+        // Draw the background sprite first
         creditsSprite.draw(batch);
 
+        // Draw text on top of the background
+
+
+        // End drawing
         batch.end();
-
-        // Draw the stage (buttons)
-
+        text.render();
     }
 
     @Override
-    public void show() {
-
-    }
+    public void show() { }
 
     @Override
-    public void resize(int width, int height) {
-//        game.viewport.update(width, height, true);
-    }
+    public void resize(int width, int height) { }
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() { }
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() { }
 
     @Override
-    public void hide() {
+    public void hide() { }
 
-    }
-
+    @Override
     public void dispose() {
-        // Dispose of textures and other resources when done
         creditsTexture.dispose();
+        text.dispose();
     }
 }
