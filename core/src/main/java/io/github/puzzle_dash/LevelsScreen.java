@@ -21,15 +21,15 @@ public class LevelsScreen implements Screen {
     Texture levelmenuTexture;
     Stage stage;
     //button sprite
-    Sprite lvl_editbuttonsprite;
-    Sprite backbuttonsprite;
+//    Sprite lvl_editbuttonsprite;
+//    Sprite backbuttonsprite;
     //buttons
-    Texture lvl_editbuttonTexture;
-    Texture backbuttonTexture;
-    ImageButton button5;
-    ImageButton button6;
+    private final Texture lvl_editbuttonTexture;
+    private final Texture backbuttonTexture;
+    private final ImageButton button5;
+    private final ImageButton button6;
 
-    public LevelsScreen(SpriteBatch batch) {
+    LevelsScreen(SpriteBatch batch) {
         this.batch = batch;
 
         levelmenuTexture=new Texture("level-menu.png");
@@ -39,9 +39,9 @@ public class LevelsScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         lvl_editbuttonTexture = new Texture("level-editor-button.png");
-        lvl_editbuttonsprite = new Sprite(lvl_editbuttonTexture);
-        TextureRegion buttonRegion5 = new TextureRegion(lvl_editbuttonTexture);
-        TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(buttonRegion5);
+//        lvl_editbuttonsprite = new Sprite(lvl_editbuttonTexture);
+//        TextureRegion buttonRegion5 = new TextureRegion(lvl_editbuttonTexture);
+        TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(lvl_editbuttonTexture);
         button5 = new ImageButton(buttonDrawable5);
         button5.setSize(330, 83);
         button5.setPosition(795, 222);
@@ -57,9 +57,9 @@ public class LevelsScreen implements Screen {
             }
         });
         backbuttonTexture = new Texture("back-button.png");
-        backbuttonsprite = new Sprite(backbuttonTexture);
-        TextureRegion buttonRegion6 = new TextureRegion(backbuttonTexture);
-        TextureRegionDrawable buttonDrawable6 = new TextureRegionDrawable(buttonRegion6);
+        //backbuttonsprite = new Sprite(backbuttonTexture);
+//        TextureRegion buttonRegion6 = new TextureRegion(backbuttonTexture);
+        TextureRegionDrawable buttonDrawable6 = new TextureRegionDrawable(backbuttonTexture);
         button6 = new ImageButton(buttonDrawable6);
         button6.setSize(139, 83);
         button6.setPosition(890, 116);
@@ -114,5 +114,7 @@ public class LevelsScreen implements Screen {
     @Override
     public void dispose() {
         levelmenuTexture.dispose();
+        backbuttonTexture.dispose();
+        lvl_editbuttonTexture.dispose();
     }
 }
