@@ -51,7 +51,7 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         // Play button texture
-        playbuttonTexture = new Texture("play-button (2).png");
+        playbuttonTexture = new Texture("play-button.png");
         playbuttonsprite = new Sprite(playbuttonTexture);
         TextureRegion buttonRegion1 = new TextureRegion(playbuttonTexture);
         TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(buttonRegion1);
@@ -117,7 +117,7 @@ public class MainMenuScreen implements Screen {
         TextureRegionDrawable buttonDrawable4 = new TextureRegionDrawable(buttonRegion4);
         button4 = new ImageButton(buttonDrawable4);
         button4.setSize(181, 82);
-        button4.setPosition(863, 203);
+        button4.setPosition(865, 203);
 
 
         button4.addListener(new ClickListener() {
