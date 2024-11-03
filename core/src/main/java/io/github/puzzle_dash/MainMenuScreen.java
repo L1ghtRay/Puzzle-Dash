@@ -19,22 +19,18 @@ public class MainMenuScreen implements Screen {
 
     SpriteBatch batch;
     // Sprites
-    Sprite mainmenusprite;
-    Sprite playbuttonsprite;
-    Sprite levelbuttonsprite;
-    Sprite creditsbuttonsprite;
-    Sprite exitbuttonsprite;
-    Texture mainmenuTexture;
-    Stage stage; // Stage for the button
+    private final Sprite mainmenusprite;
+//    private final Sprite playbuttonsprite;
+//    private final Sprite levelbuttonsprite;
+//    private final Sprite creditsbuttonsprite;
+//    private final Sprite exitbuttonsprite;
+    private final Texture mainmenuTexture;
+    private final Stage stage; // Stage for the button
     // Buttons
-    Texture playbuttonTexture;
-    ImageButton button1;
-    Texture levelbuttonTexture;
-    ImageButton button2;
-    Texture creditsbuttonTexture;
-    ImageButton button3;
-    Texture exitbuttonTexture;
-    ImageButton button4;
+    private final Texture playbuttonTexture;
+    private final Texture levelbuttonTexture;
+    private final Texture creditsbuttonTexture;
+    private final Texture exitbuttonTexture;
 
     MainMenuScreen(final PuzzleDashGame game) {
         this.game = game;
@@ -52,10 +48,10 @@ public class MainMenuScreen implements Screen {
 
         // Play button texture
         playbuttonTexture = new Texture("play-button.png");
-        playbuttonsprite = new Sprite(playbuttonTexture);
-        TextureRegion buttonRegion1 = new TextureRegion(playbuttonTexture);
-        TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(buttonRegion1);
-        button1 = new ImageButton(buttonDrawable1);
+//        playbuttonsprite = new Sprite(playbuttonTexture);
+//        TextureRegion buttonRegion1 = new TextureRegion(playbuttonTexture);
+        TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(playbuttonTexture);
+        ImageButton button1 = new ImageButton(buttonDrawable1);
         button1.setSize(149, 82);
         button1.setPosition(885, 489);
 
@@ -72,10 +68,10 @@ public class MainMenuScreen implements Screen {
 
         // Level button texture
         levelbuttonTexture = new Texture("level-button.png");
-        levelbuttonsprite = new Sprite(levelbuttonTexture);
-        TextureRegion buttonRegion2 = new TextureRegion(levelbuttonTexture);
-        TextureRegionDrawable buttonDrawable2 = new TextureRegionDrawable(buttonRegion2);
-        button2 = new ImageButton(buttonDrawable2);
+//        levelbuttonsprite = new Sprite(levelbuttonTexture);
+//        TextureRegion buttonRegion2 = new TextureRegion(levelbuttonTexture);
+        TextureRegionDrawable buttonDrawable2 = new TextureRegionDrawable(levelbuttonTexture);
+        ImageButton button2 = new ImageButton(buttonDrawable2);
         button2.setSize(209, 84);
         button2.setPosition(858, 393);
 
@@ -92,10 +88,10 @@ public class MainMenuScreen implements Screen {
 
         // Credits button texture
         creditsbuttonTexture = new Texture("credits-button.png");
-        creditsbuttonsprite = new Sprite(creditsbuttonTexture);
-        TextureRegion buttonRegion3 = new TextureRegion(creditsbuttonTexture);
-        TextureRegionDrawable buttonDrawable3 = new TextureRegionDrawable(buttonRegion3);
-        button3 = new ImageButton(buttonDrawable3);
+//        creditsbuttonsprite = new Sprite(creditsbuttonTexture);
+//        TextureRegion buttonRegion3 = new TextureRegion(creditsbuttonTexture);
+        TextureRegionDrawable buttonDrawable3 = new TextureRegionDrawable(creditsbuttonTexture);
+        ImageButton button3 = new ImageButton(buttonDrawable3);
         button3.setSize(277, 85);
         button3.setPosition(819, 300);
 
@@ -112,10 +108,10 @@ public class MainMenuScreen implements Screen {
 
         // Exit button texture
         exitbuttonTexture = new Texture("exit-button.png");
-        exitbuttonsprite = new Sprite(exitbuttonTexture);
-        TextureRegion buttonRegion4 = new TextureRegion(exitbuttonTexture);
-        TextureRegionDrawable buttonDrawable4 = new TextureRegionDrawable(buttonRegion4);
-        button4 = new ImageButton(buttonDrawable4);
+//        exitbuttonsprite = new Sprite(exitbuttonTexture);
+//        TextureRegion buttonRegion4 = new TextureRegion(exitbuttonTexture);
+        TextureRegionDrawable buttonDrawable4 = new TextureRegionDrawable(exitbuttonTexture);
+        ImageButton button4 = new ImageButton(buttonDrawable4);
         button4.setSize(181, 82);
         button4.setPosition(865, 209);
 
