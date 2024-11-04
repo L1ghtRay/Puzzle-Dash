@@ -99,6 +99,10 @@ public class Level1 implements Screen {
         gamePort = new StretchViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, camera);
         hud = new Hud(this.batch);
 
+
+
+
+
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("tutorial-room.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
