@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -91,10 +90,12 @@ public class Level1 implements Screen {
     Player player;
     OrthogonalTiledMapRenderer renderer;
 
+    private static final float PLAYER_SPEED = 100; // Regular speed
+    private static final float DASH_SPEED = 300; // Dash speed
 
 
     public Level1(SpriteBatch batch) {
-        this.batch= batch;
+        this.batch = batch;
         camera = new OrthographicCamera();
         gamePort = new StretchViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, camera);
         hud = new Hud(this.batch);
@@ -106,13 +107,22 @@ public class Level1 implements Screen {
     }
 
     public void handleInput(float dt) {
-        if (Gdx.input.isTouched()) {
-            camera.position.x += 100 * dt;
+        float speed = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? DASH_SPEED : PLAYER_SPEED;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            player.setPosition(player.getX() + speed * dt, player.getY());
+            System.out.println("Moving Right"); // Debugging
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            player.setPosition(player.getX() - speed * dt, player.getY());
+            System.out.println("Moving Left"); // Debugging
         }
     }
 
     public void update(float dt) {
         handleInput(dt);
+        hud.update(dt);
+        camera.position.x = player.getX(); // Center the camera on the player
         camera.update();
         renderer.setView(camera);
     }
@@ -122,21 +132,18 @@ public class Level1 implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
             game.setScreen(new MainMenuScreen(game));
-
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-
-
-        }
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
         renderer.getBatch().begin();
-        player.draw(renderer.getBatch());
+        player.draw(renderer.getBatch()); // Ensure player draw method is invoked
         renderer.getBatch().end();
+
+        hud.stage.draw(); // Draw the HUD
     }
 
     @Override
@@ -146,32 +153,25 @@ public class Level1 implements Screen {
 
     @Override
     public void show() {
-        // This method is called when the screen is set
-
-        player= new Player(new Sprite(new Texture("guy-sheet.png")));
-//        Gdx.input.setInputProcessor(player=new PlayerTest());
+        player = new Player(new Sprite(new Texture("guy-sheet.png")));
+        player.setPosition(100, 100); // Set initial position for visibility
+        System.out.println("Player initialized"); // Debugging
     }
 
     @Override
-    public void hide() {
-        // Called when the screen is no longer set
-    }
+    public void hide() {}
 
     @Override
-    public void pause() {
-        // Called when the game is paused
-    }
+    public void pause() {}
 
     @Override
-    public void resume() {
-        // Called when the game is resumed
-    }
+    public void resume() {}
 
     @Override
     public void dispose() {
         map.dispose();
         renderer.dispose();
         hud.dispose();
+        player.getTexture().dispose();
     }
-
 }
