@@ -3,7 +3,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 class Hud implements Disposable {
@@ -36,7 +39,7 @@ class Hud implements Disposable {
         timeCount = 0;
         score = 0;
 
-        viewport = new FitViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new StretchViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
         Table table = new Table();
@@ -85,6 +88,7 @@ public class Level1 implements Screen {
     SpriteBatch batch;
     TmxMapLoader mapLoader;
     TiledMap map;
+    Player player;
     OrthogonalTiledMapRenderer renderer;
 
 
@@ -92,7 +96,7 @@ public class Level1 implements Screen {
     public Level1(SpriteBatch batch) {
         this.batch= batch;
         camera = new OrthographicCamera();
-        gamePort = new FitViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, camera);
+        gamePort = new StretchViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, camera);
         hud = new Hud(this.batch);
 
         mapLoader = new TmxMapLoader();
@@ -120,11 +124,19 @@ public class Level1 implements Screen {
             game.setScreen(new MainMenuScreen(game));
 
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+
+
+        }
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
+        renderer.getBatch().begin();
+        player.draw(renderer.getBatch());
+        renderer.getBatch().end();
     }
 
     @Override
@@ -135,6 +147,9 @@ public class Level1 implements Screen {
     @Override
     public void show() {
         // This method is called when the screen is set
+
+        player= new Player(new Sprite(new Texture("guy-sheet.png")));
+//        Gdx.input.setInputProcessor(player=new PlayerTest());
     }
 
     @Override
