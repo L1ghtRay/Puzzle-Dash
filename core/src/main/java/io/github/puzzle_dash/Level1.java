@@ -1,5 +1,5 @@
 package io.github.puzzle_dash;
-
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -115,6 +115,11 @@ public class Level1 implements Screen {
 
     @Override
     public void render(float delta) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+            game.setScreen(new MainMenuScreen(game));
+
+        }
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

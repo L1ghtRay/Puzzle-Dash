@@ -1,6 +1,7 @@
 package io.github.puzzle_dash;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -43,6 +44,8 @@ public class MainMenuScreen implements Screen {
         mainmenusprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Set up the stage and input processor
+
+
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
@@ -62,6 +65,7 @@ public class MainMenuScreen implements Screen {
                 System.out.println("Start Game Button Clicked!");
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new Level1(batch));
+                dispose();
                 // Add code to start the game or transition to another screen
             }
         });
@@ -104,6 +108,8 @@ public class MainMenuScreen implements Screen {
                 game.setScreen(new CreditsScreen(batch));
                 dispose();
             }
+
+
         });
 
         // Exit button texture
@@ -141,7 +147,10 @@ public class MainMenuScreen implements Screen {
 
         // Clear the screen
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            Gdx.app.exit();  // Exit the game
+            dispose();
+        }
         // Draw the sprite (background)
         batch.begin();
         mainmenusprite.draw(batch);
