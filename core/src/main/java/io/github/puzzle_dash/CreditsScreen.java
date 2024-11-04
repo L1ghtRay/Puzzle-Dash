@@ -1,6 +1,7 @@
 package io.github.puzzle_dash;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -31,7 +32,11 @@ public class CreditsScreen implements Screen {
     public void render(float delta) {
         // Clear the screen
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+            game.setScreen(new MainMenuScreen(game));
 
+        }
         // Begin drawing
         batch.begin();
 
