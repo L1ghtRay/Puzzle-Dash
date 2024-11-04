@@ -3,6 +3,7 @@ package io.github.puzzle_dash;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,10 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen implements Screen
+{
     final PuzzleDashGame game;
-
     SpriteBatch batch;
     // Sprites
     private final Sprite mainmenusprite;
@@ -32,6 +32,7 @@ public class MainMenuScreen implements Screen {
     private final Texture levelbuttonTexture;
     private final Texture creditsbuttonTexture;
     private final Texture exitbuttonTexture;
+
 
     MainMenuScreen(final PuzzleDashGame game) {
         this.game = game;
@@ -57,6 +58,7 @@ public class MainMenuScreen implements Screen {
         ImageButton button1 = new ImageButton(buttonDrawable1);
         button1.setSize(149, 82);
         button1.setPosition(885, 489);
+
 
         button1.addListener(new ClickListener() {
             @Override
@@ -187,6 +189,10 @@ public class MainMenuScreen implements Screen {
 
     }
 
+
+
+
+
     public void dispose() {
         // Dispose of textures and other resources when done
 //        batch.dispose();
@@ -196,5 +202,7 @@ public class MainMenuScreen implements Screen {
         levelbuttonTexture.dispose();
         creditsbuttonTexture.dispose();
         exitbuttonTexture.dispose();
+
     }
 }
+

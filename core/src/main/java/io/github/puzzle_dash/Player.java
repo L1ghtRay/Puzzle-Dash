@@ -29,6 +29,13 @@ public class Player extends Sprite {
         else if(velocity.y<speed)
             velocity.y= -speed;
         setX(getX()+velocity.x*delta);
-        setY(getY()+velocity.x*delta);
+        setY(getY()+velocity.y*delta);
     }
+
+
+
+
+
+
+
 }
