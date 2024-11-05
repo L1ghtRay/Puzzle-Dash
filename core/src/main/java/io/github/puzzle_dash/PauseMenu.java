@@ -49,6 +49,7 @@ public class PauseMenu implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Start Game Button Clicked!");
                 bg.stop();
+                lvl1.resumeGame();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(lvl1);
                 dispose();

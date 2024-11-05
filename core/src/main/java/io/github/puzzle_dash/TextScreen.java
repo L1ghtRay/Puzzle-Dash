@@ -37,7 +37,7 @@ public class TextScreen  {
         font.draw(batch, "TILED", 800, 500);
         font.draw(batch, "PHOTOSHOP", 800, 400);
         font.draw(batch, "IDE", 800, 300);
-        font.draw(batch, "INTELIJ", 800, 200);
+        font.draw(batch, "INTELLIJ", 800, 200);
 
 
         // End drawing

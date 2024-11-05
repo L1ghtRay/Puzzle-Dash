@@ -20,8 +20,9 @@ public class Player extends Sprite {
     Music bg;
     SpriteBatch batch;
 
-    public Player(Sprite sprite) {
+    public Player(Sprite sprite,Music bg) {
         super(sprite);
+        this.bg=bg;
         batch=new SpriteBatch();
         boundingBox = new Rectangle(getX(), getY(), getWidth()-50 , getHeight());
     }
@@ -64,6 +65,7 @@ public class Player extends Sprite {
 
         if(getY()<=0)
         {
+            bg.stop();
             PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
             game.setScreen(new DeathScreen(batch));
         }
