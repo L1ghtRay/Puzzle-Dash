@@ -102,6 +102,9 @@ public class Level1 implements Screen {
     OrthogonalTiledMapRenderer renderer;
     Stage stage;
     boolean isPaused;
+    private float savedPlayerX, savedPlayerY;
+    private int savedTextureIndex;
+    private float savedAnimationTimer;
     private static final float PLAYER_SPEED = 100; // Regular speed
     private static final float DASH_SPEED = 170; // Dash speed
 
@@ -199,17 +202,19 @@ public class Level1 implements Screen {
             new Texture("guy7.png")
         };
 
+        bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
+        bg.setLooping(true); // Set to loop if needed
+        bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
+        bg.play(); // Start playing the music
+
         // Initialize player with the first texture
-        player = new Player(new Sprite(playerTextures[0]));
+        player = new Player(new Sprite(playerTextures[0]),bg);
         player.setScale(2.0f, 2.0f);
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
         player.setPosition(450, 380);
         player.setCollisionLayer(collisionLayer);
-        bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
-        bg.setLooping(true); // Set to loop if needed
-        bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
-        bg.play(); // Start playing the music
+
 
 
         currentTextureIndex = 0;
@@ -240,10 +245,18 @@ public class Level1 implements Screen {
     }
     public void resumeGame()
     {
+        savedPlayerX = player.getX();
+        savedPlayerY = player.getY();
+        savedTextureIndex = currentTextureIndex;
+        savedAnimationTimer = animationTimer;
+
         isPaused = false;
     }
     public void pausedGame()
     {
+        player.setPosition(savedPlayerX, savedPlayerY);
+        currentTextureIndex = savedTextureIndex;
+        animationTimer = savedAnimationTimer;
         isPaused=true;
     }
 
