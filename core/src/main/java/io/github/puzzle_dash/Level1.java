@@ -1,4 +1,5 @@
 package io.github.puzzle_dash;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -79,6 +80,13 @@ class Hud implements Disposable {
 }
 
 public class Level1 implements Screen {
+
+
+    private Texture[] playerTextures;
+    private int currentTextureIndex;
+    private float animationTimer;
+    private static final float FRAME_DURATION = 0.1f; // Time per frame in seconds
+
     PuzzleDashGame game;
 
     OrthographicCamera camera;
@@ -93,7 +101,6 @@ public class Level1 implements Screen {
     private static final float PLAYER_SPEED = 100; // Regular speed
     private static final float DASH_SPEED = 300; // Dash speed
 
-
     public Level1(SpriteBatch batch) {
         this.batch = batch;
         camera = new OrthographicCamera();
@@ -107,17 +114,34 @@ public class Level1 implements Screen {
     }
 
     public void handleInput(float dt) {
+        boolean isMoving = false;
         float speed = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? DASH_SPEED : PLAYER_SPEED;
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             player.setPosition(player.getX() + speed * dt, player.getY());
+            isMoving = true;
             System.out.println("Moving Right"); // Debugging
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             player.setPosition(player.getX() - speed * dt, player.getY());
+            isMoving = true;
             System.out.println("Moving Left"); // Debugging
         }
+
+        // Handle animation only if moving
+        if (isMoving) {
+            animationTimer += dt;
+            if (animationTimer >= FRAME_DURATION) {
+                animationTimer = 0;
+                currentTextureIndex = (currentTextureIndex + 1) % playerTextures.length;
+                player.setTexture(playerTextures[currentTextureIndex]);
+            }
+        } else {
+            // Reset to first texture if not moving
+            player.setTexture(playerTextures[0]);
+        }
     }
+
 
     public void update(float dt) {
         handleInput(dt);
@@ -140,7 +164,7 @@ public class Level1 implements Screen {
 
         renderer.render();
         renderer.getBatch().begin();
-        player.draw(renderer.getBatch()); // Ensure player draw method is invoked
+        player.draw(renderer.getBatch()); // Directly draw the player
         renderer.getBatch().end();
 
         hud.stage.draw(); // Draw the HUD
@@ -151,14 +175,32 @@ public class Level1 implements Screen {
         gamePort.update(width, height);
     }
 
+
     @Override
     public void show() {
-        player = new Player(new Sprite(new Texture("p1-removebg-preview.png")));
-        player.setScale(0.4f, 0.4f); // Scale down to 50% in both width and height
+        playerTextures = new Texture[]{
+            new Texture("p2-removebg-preview.png"),
+            new Texture("p3-removebg-preview.png"),
+            new Texture("p4-removebg-preview.png"),
+            new Texture("p5-removebg-preview.png"),
+            new Texture("p6-removebg-preview.png"),
+            new Texture("p7-removebg-preview.png")
 
-        player.setPosition(250, 140); // Set initial position for visibility
-        System.out.println("Player initialized"); // Debugging
+
+
+        };
+
+        // Initialize player with the first texture
+        player = new Player(new Sprite(playerTextures[0]));
+        player.setScale(0.4f, 0.4f);
+        player.setPosition(250, 140);
+
+
+        currentTextureIndex = 0;
+        animationTimer = 0;
+        System.out.println("Player initialized with animation"); // Debugging
     }
+
 
     @Override
     public void hide() {}
@@ -177,3 +219,6 @@ public class Level1 implements Screen {
         player.getTexture().dispose();
     }
 }
+
+
+
