@@ -19,7 +19,7 @@ public class CreditsScreen implements Screen {
         this.batch = batch;
 
         // Load background image
-        creditsTexture = new Texture("credits.png");
+        creditsTexture = new Texture("credits-bg.png");
         creditsSprite = new Sprite(creditsTexture);
         creditsSprite.setPosition(0, 0);
         creditsSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

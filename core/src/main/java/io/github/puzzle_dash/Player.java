@@ -55,7 +55,7 @@ public class Player extends Sprite {
         }
 
         // Check if the player is on the ground (you might need to adjust this condition)
-        isOnGround = getY() <= 0; // Adjust based on your map's ground level
+        isOnGround = getY() <= 140; // Adjust based on your map's ground level
     }
 
     public void checkCollisions(float delta) {
@@ -110,7 +110,7 @@ public class Player extends Sprite {
 
     public void jump() {
         if (isOnGround) {
-            velocity.y = jumpSpeed;
+            velocity.y = jumpSpeed-100;
             isOnGround = false; // Player is now in the air after jumping
         }
     }
