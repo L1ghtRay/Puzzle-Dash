@@ -7,7 +7,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -32,6 +31,8 @@ public class MainMenuScreen implements Screen
     private final Texture levelbuttonTexture;
     private final Texture creditsbuttonTexture;
     private final Texture exitbuttonTexture;
+    private final Texture settingsbuttonTexture;
+    private Music bg;
 
 
     MainMenuScreen(final PuzzleDashGame game) {
@@ -65,6 +66,7 @@ public class MainMenuScreen implements Screen
             public void clicked(InputEvent event, float x, float y) {
 //                Gdx.app.log("Button", "Start Game Button Clicked!");
                 System.out.println("Start Game Button Clicked!");
+                bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new Level1(batch));
                 dispose();
@@ -86,6 +88,7 @@ public class MainMenuScreen implements Screen
             public void clicked(InputEvent event, float x, float y) {
 //                Gdx.app.log("Button", "Start Level Button Clicked!");
                 System.out.println("Start Level Button Clicked!");
+                bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new LevelsScreen(batch));
                 dispose();
@@ -106,6 +109,7 @@ public class MainMenuScreen implements Screen
             public void clicked(InputEvent event, float x, float y) {
 //                Gdx.app.log("Button", "Open Credits Button Clicked!");
                 System.out.println("Open Credits Button Clicked!");
+                bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new CreditsScreen(batch));
                 dispose();
@@ -116,17 +120,10 @@ public class MainMenuScreen implements Screen
 
         // Exit button texture
         exitbuttonTexture = new Texture("exit-button.png");
-//        exitbuttonsprite = new Sprite(exitbuttonTexture);
-//        TextureRegion buttonRegion4 = new TextureRegion(exitbuttonTexture);
         TextureRegionDrawable buttonDrawable4 = new TextureRegionDrawable(exitbuttonTexture);
         ImageButton button4 = new ImageButton(buttonDrawable4);
         button4.setSize(181, 82);
         button4.setPosition(865, 209);
-
-
-
-
-
         button4.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -135,12 +132,34 @@ public class MainMenuScreen implements Screen
                 Gdx.app.exit(); // Exit the application
             }
         });
+        settingsbuttonTexture = new Texture("settings-icon.png");
+//        creditsbuttonsprite = new Sprite(creditsbuttonTexture);
+//        TextureRegion buttonRegion3 = new TextureRegion(creditsbuttonTexture);
+        TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(settingsbuttonTexture);
+        ImageButton button5= new ImageButton(buttonDrawable5);
+        button5.setSize(88, 88);
+        button5.setPosition(300, 900);
+
+        button5.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+//                Gdx.app.log("Button", "Open Credits Button Clicked!");
+                System.out.println("Open Credits Button Clicked!");
+                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game.setScreen(new SettingsScreen(batch));
+                dispose();
+            }
+
+
+        }); // Start playing the music
+
 
         // Add the buttons to the stage
         stage.addActor(button1);
         stage.addActor(button2);
         stage.addActor(button3);
         stage.addActor(button4);
+        stage.addActor(button5);
     }
 
 
@@ -166,6 +185,11 @@ public class MainMenuScreen implements Screen
 
     @Override
     public void show() {
+        //Load the music file
+        bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
+        bg.setLooping(true); // Set to loop if needed
+        bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
+        bg.play(); // Start playing the music
 
     }
 
@@ -189,10 +213,6 @@ public class MainMenuScreen implements Screen
 
     }
 
-
-
-
-
     public void dispose() {
         // Dispose of textures and other resources when done
 //        batch.dispose();
@@ -202,6 +222,8 @@ public class MainMenuScreen implements Screen
         levelbuttonTexture.dispose();
         creditsbuttonTexture.dispose();
         exitbuttonTexture.dispose();
+        bg.dispose();
+
 
     }
 }

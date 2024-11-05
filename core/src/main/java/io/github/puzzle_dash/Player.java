@@ -18,7 +18,7 @@ public class Player extends Sprite {
 
     public Player(Sprite sprite) {
         super(sprite);
-        boundingBox = new Rectangle(getX(), getY(), getWidth() - 229, getHeight() - 229);
+        boundingBox = new Rectangle(getX(), getY(), getWidth()-50 , getHeight());
     }
 
     @Override
@@ -125,4 +125,5 @@ public class Player extends Sprite {
             isOnGround = false; // Player is now in the air after jumping
         }
     }
+
 }

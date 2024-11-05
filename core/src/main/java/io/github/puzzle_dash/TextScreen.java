@@ -7,13 +7,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class TextScreen  {
 
-     SpriteBatch batch;
+    SpriteBatch batch;
     BitmapFont font;
 
     public TextScreen(SpriteBatch batch) {
         // Initialize the SpriteBatch and load the custom BitmapFont
         this.batch=batch;
         font = new BitmapFont(Gdx.files.internal("press.fnt"), Gdx.files.internal("press.png"), false);
+        font.getData().setScale(1.5f);
     }
 
     public void render() {
@@ -27,10 +28,17 @@ public class TextScreen  {
         font.setColor(1, 1, 1, 1); // White color
 
         // Draw text
-        font.draw(batch, "GAME OVER!", 800, 1000);
-        font.draw(batch, "Credits", 1600, 100);
-        font.draw(batch, "Music", 800, 700);
-        font.draw(batch, "Directed by", 800, 500);// Position (x, y)
+
+        font.draw(batch, "CREDITS", 800, 1000);
+        font.draw(batch, "MUSIC", 800, 900);
+        font.draw(batch, "PIXABAY", 800, 800);
+        font.draw(batch, "TOOLS", 800, 700);
+        font.draw(batch, "LIBGDX", 800, 600);
+        font.draw(batch, "TILED", 800, 500);
+        font.draw(batch, "PHOTOSHOP", 800, 400);
+        font.draw(batch, "IDE", 800, 300);
+        font.draw(batch, "INTELIJ", 800, 200);
+
 
         // End drawing
         batch.end();
@@ -42,4 +50,3 @@ public class TextScreen  {
         font.dispose();
     }
 }
-
