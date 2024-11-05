@@ -153,8 +153,10 @@ public class Level1 implements Screen {
 
     @Override
     public void show() {
-        player = new Player(new Sprite(new Texture("guy-sheet.png")));
-        player.setPosition(100, 100); // Set initial position for visibility
+        player = new Player(new Sprite(new Texture("p1-removebg-preview.png")));
+        player.setScale(0.4f, 0.4f); // Scale down to 50% in both width and height
+
+        player.setPosition(250, 140); // Set initial position for visibility
         System.out.println("Player initialized"); // Debugging
     }
 
