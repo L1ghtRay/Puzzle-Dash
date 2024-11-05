@@ -32,6 +32,7 @@ public class MainMenuScreen implements Screen
     private final Texture levelbuttonTexture;
     private final Texture creditsbuttonTexture;
     private final Texture exitbuttonTexture;
+    private final Texture settingsbuttonTexture;
 
 
     MainMenuScreen(final PuzzleDashGame game) {
@@ -135,12 +136,34 @@ public class MainMenuScreen implements Screen
                 Gdx.app.exit(); // Exit the application
             }
         });
+        settingsbuttonTexture = new Texture("settings-icon.png");
+//        creditsbuttonsprite = new Sprite(creditsbuttonTexture);
+//        TextureRegion buttonRegion3 = new TextureRegion(creditsbuttonTexture);
+        TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(settingsbuttonTexture);
+        ImageButton button5= new ImageButton(buttonDrawable5);
+        button5.setSize(88, 88);
+        button5.setPosition(300, 900);
+
+        button5.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+//                Gdx.app.log("Button", "Open Credits Button Clicked!");
+                System.out.println("Open Credits Button Clicked!");
+                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game.setScreen(new SettingsScreen(batch));
+                dispose();
+            }
+
+
+        });
+
 
         // Add the buttons to the stage
         stage.addActor(button1);
         stage.addActor(button2);
         stage.addActor(button3);
         stage.addActor(button4);
+        stage.addActor(button5);
     }
 
 
