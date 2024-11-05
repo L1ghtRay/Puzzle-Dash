@@ -199,18 +199,18 @@ public class Level1 implements Screen {
         @Override
         public void show() {
             playerTextures = new Texture[]{
-                new Texture("p1-removebg-preview.png"),
-                new Texture("p2-removebg-preview.png"),
-                new Texture("p3-removebg-preview.png"),
-                new Texture("p4-removebg-preview.png"),
-                new Texture("p5-removebg-preview.png"),
-                new Texture("p6-removebg-preview.png"),
-                new Texture("p7-removebg-preview.png")
+                new Texture("guy1.png"),
+                new Texture("guy2.png"),
+                new Texture("guy3.png"),
+                new Texture("guy4.png"),
+                new Texture("guy5.png"),
+                new Texture("guy6.png"),
+                new Texture("guy7.png")
             };
 
             // Initialize player with the first texture
             player = new Player(new Sprite(playerTextures[0]));
-            player.setScale(0.4f, 0.4f);
+            player.setScale(2.0f, 2.0f);
 
             TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
             player.setPosition(450,380);
