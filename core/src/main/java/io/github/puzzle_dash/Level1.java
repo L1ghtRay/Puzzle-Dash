@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,17 +14,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -110,7 +103,7 @@ public class Level1 implements Screen {
     Stage stage;
     boolean isPaused;
     private static final float PLAYER_SPEED = 100; // Regular speed
-    private static final float DASH_SPEED = 300; // Dash speed
+    private static final float DASH_SPEED = 170; // Dash speed
 
     public Level1(SpriteBatch batch) {
         this.batch = batch;
@@ -122,16 +115,6 @@ public class Level1 implements Screen {
         map = mapLoader.load("tutorial-room.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         camera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
-//        stage = new Stage(new ScreenViewport());
-//        Gdx.input.setInputProcessor(stage);
-//        PauseTexture = new Texture("play-button.png");
-////        playbuttonsprite = new Sprite(playbuttonTexture);
-////        TextureRegion buttonRegion1 = new TextureRegion(playbuttonTexture);
-//        TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(PauseTexture);
-//        ImageButton button1 = new ImageButton(buttonDrawable1);
-//        button1.setSize(149, 82);
-//        button1.setPosition(885, 489);
-//        stage.addActor(button1);
     }
 
     public void handleInput(float dt) {
@@ -149,7 +132,6 @@ public class Level1 implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             player.jump(); // Initiate jump
         }
-        isPaused=false;
         // Handle animation only if moving
         if (isMoving) {
             animationTimer += dt;
@@ -159,7 +141,8 @@ public class Level1 implements Screen {
                 if (currentTextureIndex != 0)
                     player.setRegion(playerTextures[currentTextureIndex]);
             }
-        } else {
+        }
+        else {
             player.setRegion(playerTextures[0]);
         }
     }
@@ -179,10 +162,14 @@ public class Level1 implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             bg.stop();
             PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-            game.setScreen(new PauseMenu(batch,Level1.this));
+            game.setScreen(new PauseMenu(batch, Level1.this));
 
         }
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            bg.stop();
+            PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+            game.setScreen(new Level1(batch));
+        }
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -230,7 +217,7 @@ public class Level1 implements Screen {
         System.out.println("Player initialized with animation");
     }
 
-        // Debugging
+    // Debugging
 
 
 

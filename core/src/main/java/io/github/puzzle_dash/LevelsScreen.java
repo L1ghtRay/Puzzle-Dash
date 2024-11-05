@@ -14,35 +14,34 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
+//        Class
 public class LevelsScreen implements Screen {
     SpriteBatch batch1;
-
-
-
     private Music bg;
-
     Sprite levelmenusprite;
     Texture levelmenuTexture;
     Stage stage;
     private final Texture lvl_editbuttonTexture;
     private final Texture backbuttonTexture;
-
+//        Constructor
     LevelsScreen(SpriteBatch batch) {
         batch1 = batch;
-
+//        LevelMenu Screen
         levelmenuTexture=new Texture("level-menu.png");
         levelmenusprite = new Sprite(levelmenuTexture);
         levelmenusprite.setPosition(0, 0);
         levelmenusprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
+//        Stage
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+//        Level Editor Buuton
         lvl_editbuttonTexture = new Texture("level-editor-button.png");
         TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(lvl_editbuttonTexture);
         ImageButton button5 = new ImageButton(buttonDrawable5);
         button5.setSize(330, 83);
         button5.setPosition(795, 222);
+
         button5.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -54,37 +53,32 @@ public class LevelsScreen implements Screen {
 
             }
         });
-        backbuttonTexture = new Texture("back-button.png");
 
+//        Back Button
+        backbuttonTexture = new Texture("back-button.png");
         TextureRegionDrawable buttonDrawable6 = new TextureRegionDrawable(backbuttonTexture);
         ImageButton button6 = new ImageButton(buttonDrawable6);
         button6.setSize(139, 83);
         button6.setPosition(890, 116);
+
         button6.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 System.out.println(" Back Button Clicked!");
                 bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new MainMenuScreen(game));
-
-
-
-
             }
         });
 
-
-
         stage.addActor(button5);
         stage.addActor(button6);
-
     }
 
     @Override
     public void show() {
 
+//        Music
         bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
         bg.setLooping(true); // Set to loop if needed
         bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
@@ -96,6 +90,7 @@ public class LevelsScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+//        TO Go Back
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
             game.setScreen(new MainMenuScreen(game));

@@ -37,43 +37,37 @@ public class MainMenuScreen implements Screen
 //    Constructor
     MainMenuScreen(final PuzzleDashGame game) {
         this.game = game;
+//        Main Screen
         mainmenuTexture = new Texture("main-menu.png");
         batch = new SpriteBatch();
-
         mainmenusprite = new Sprite(mainmenuTexture);
         mainmenusprite.setPosition(0, 0);
         mainmenusprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-
+//        Stage
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
         // Play button texture
         playbuttonTexture = new Texture("play-button.png");
-
         TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(playbuttonTexture);
         ImageButton button1 = new ImageButton(buttonDrawable1);
         button1.setSize(149, 82);
         button1.setPosition(885, 489);
 
-
         button1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                Gdx.app.log("Button", "Start Game Button Clicked!");
                 System.out.println("Start Game Button Clicked!");
                 bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new Level1(batch));
                 dispose();
-                // Add code to start the game or transition to another screen
             }
         });
 
         // Level button texture
         levelbuttonTexture = new Texture("level-button.png");
-//        levelbuttonsprite = new Sprite(levelbuttonTexture);
-//        TextureRegion buttonRegion2 = new TextureRegion(levelbuttonTexture);
         TextureRegionDrawable buttonDrawable2 = new TextureRegionDrawable(levelbuttonTexture);
         ImageButton button2 = new ImageButton(buttonDrawable2);
         button2.setSize(209, 84);
@@ -82,7 +76,6 @@ public class MainMenuScreen implements Screen
         button2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                Gdx.app.log("Button", "Start Level Button Clicked!");
                 System.out.println("Start Level Button Clicked!");
                 bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
@@ -93,8 +86,6 @@ public class MainMenuScreen implements Screen
 
         // Credits button texture
         creditsbuttonTexture = new Texture("credits-button.png");
-//        creditsbuttonsprite = new Sprite(creditsbuttonTexture);
-//        TextureRegion buttonRegion3 = new TextureRegion(creditsbuttonTexture);
         TextureRegionDrawable buttonDrawable3 = new TextureRegionDrawable(creditsbuttonTexture);
         ImageButton button3 = new ImageButton(buttonDrawable3);
         button3.setSize(277, 85);
@@ -103,7 +94,6 @@ public class MainMenuScreen implements Screen
         button3.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                Gdx.app.log("Button", "Open Credits Button Clicked!");
                 System.out.println("Open Credits Button Clicked!");
                 bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
@@ -120,35 +110,33 @@ public class MainMenuScreen implements Screen
         ImageButton button4 = new ImageButton(buttonDrawable4);
         button4.setSize(181, 82);
         button4.setPosition(865, 209);
+
         button4.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                Gdx.app.log("Button", "Exit Game Button Clicked!");
+
                 System.out.println("Exit Game Button Clicked!");
                 Gdx.app.exit(); // Exit the application
             }
         });
+//        Setting Icon
         settingsbuttonTexture = new Texture("settings-icon.png");
-//        creditsbuttonsprite = new Sprite(creditsbuttonTexture);
-//        TextureRegion buttonRegion3 = new TextureRegion(creditsbuttonTexture);
         TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(settingsbuttonTexture);
         ImageButton button5= new ImageButton(buttonDrawable5);
         button5.setSize(88, 88);
-        button5.setPosition(300, 900);
+        button5.setPosition(30, 970);
 
         button5.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                Gdx.app.log("Button", "Open Credits Button Clicked!");
-                System.out.println("Open Credits Button Clicked!");
+                System.out.println("Settings Button Clicked!");
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new SettingsScreen(batch));
                 dispose();
             }
 
 
-        }); // Start playing the music
-
+        });
 
         // Add the buttons to the stage
         stage.addActor(button1);
@@ -168,13 +156,13 @@ public class MainMenuScreen implements Screen
             Gdx.app.exit();  // Exit the game
             dispose();
         }
-        // Draw the sprite (background)
+
+//       Draw the sprite (background)
         batch.begin();
         mainmenusprite.draw(batch);
-
         batch.end();
 
-        // Draw the stage (buttons)
+//      Draw the stage (buttons)
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
@@ -191,7 +179,6 @@ public class MainMenuScreen implements Screen
 
     @Override
     public void resize(int width, int height) {
-//        game.viewport.update(width, height, true);
     }
 
     @Override
@@ -210,8 +197,7 @@ public class MainMenuScreen implements Screen
     }
 
     public void dispose() {
-        // Dispose of textures and other resources when done
-//        batch.dispose();
+//      Dispose of textures and other resources when done
         stage.dispose();
         mainmenuTexture.dispose();
         playbuttonTexture.dispose();
@@ -219,7 +205,6 @@ public class MainMenuScreen implements Screen
         creditsbuttonTexture.dispose();
         exitbuttonTexture.dispose();
         bg.dispose();
-
 
     }
 }

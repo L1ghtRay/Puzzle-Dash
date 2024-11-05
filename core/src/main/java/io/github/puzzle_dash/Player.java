@@ -1,8 +1,10 @@
 package io.github.puzzle_dash;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -10,14 +12,17 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends Sprite {
      Vector2 velocity = new Vector2();
      float speed = 60 * 2;
-     float gravity = 300 * 1.8f;
+     float gravity = 300 * 2.8f;
      float jumpSpeed = 500; // Set jump speed
      Rectangle boundingBox;
     private boolean isOnGround = false; // Track if player is on ground
     private TiledMapTileLayer collisionLayer;
+    Music bg;
+    SpriteBatch batch;
 
     public Player(Sprite sprite) {
         super(sprite);
+        batch=new SpriteBatch();
         boundingBox = new Rectangle(getX(), getY(), getWidth()-50 , getHeight());
     }
 
@@ -56,6 +61,12 @@ public class Player extends Sprite {
 
         // Continuously update isOnGround based on the collision layer
         isOnGround = isStandingOnTile();
+
+        if(getY()<=0)
+        {
+            PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+            game.setScreen(new DeathScreen(batch));
+        }
     }
 
     // New method to check if the player is standing on a tile
@@ -121,7 +132,7 @@ public class Player extends Sprite {
 
     public void jump() {
         if (isOnGround) {
-            velocity.y = jumpSpeed - 100;
+            velocity.y = jumpSpeed - 95;
             isOnGround = false; // Player is now in the air after jumping
         }
     }

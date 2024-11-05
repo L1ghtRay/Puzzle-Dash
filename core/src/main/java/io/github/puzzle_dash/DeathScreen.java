@@ -12,46 +12,37 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-//        Class
-public class PauseMenu implements Screen {
+
+public class DeathScreen implements Screen {
     SpriteBatch batch;
-    Texture pausemenu;
-    Sprite pausemenuSprite;
-    Stage stage;
-    Texture resumetexture;
+    Texture deathtexture;
+    Texture diedtexture;
     Texture restarttexture;
     Texture quittexture;
-    Level1 lvl1;
+    Sprite deathSprite;
     Music bg;
+    Stage stage;
+    DeathScreen(SpriteBatch batch){
 
-//    Constructor
-    PauseMenu(SpriteBatch batch, Level1 lvl1)
-    {
-
-        this.lvl1=lvl1;
         this.batch=batch;
-        pausemenu=new Texture("credits.png");
-        pausemenuSprite= new Sprite(pausemenu);
-        pausemenuSprite.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        deathtexture = new Texture("death-overlay.png");
+        deathSprite = new Sprite(deathtexture);
+        deathSprite.setPosition(0,0);
+        deathSprite.setSize(1920,1080);
+
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-//      Play button texture
-        resumetexture = new Texture("resume-button.png");
-        TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(resumetexture);
+        diedtexture = new Texture("you-died-text.png");
+        TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(diedtexture);
         ImageButton button1 = new ImageButton(buttonDrawable1);
-        button1.setSize(199, 82);
-        button1.setPosition(885, 600);
-
+        button1.setSize(714,115);
+        button1.setPosition(620,560);
 
         button1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Start Game Button Clicked!");
-                bg.stop();
-                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-                game.setScreen(lvl1);
-                dispose();
+                System.out.println("You Died!");
             }
         });
 
@@ -60,7 +51,7 @@ public class PauseMenu implements Screen {
         TextureRegionDrawable buttonDrawable2 = new TextureRegionDrawable(restarttexture);
         ImageButton button2 = new ImageButton(buttonDrawable2);
         button2.setSize(213, 83);
-        button2.setPosition(877, 450);
+        button2.setPosition(850, 370);
 
         button2.addListener(new ClickListener() {
             @Override
@@ -78,7 +69,7 @@ public class PauseMenu implements Screen {
         TextureRegionDrawable buttonDrawable3 = new TextureRegionDrawable(quittexture);
         ImageButton button3 = new ImageButton(buttonDrawable3);
         button3.setSize(139, 82);
-        button3.setPosition(920, 300);
+        button3.setPosition(886, 200);
 
         button3.addListener(new ClickListener() {
             @Override
@@ -98,21 +89,24 @@ public class PauseMenu implements Screen {
         stage.addActor(button3);
 
 
+
     }
     @Override
     public void show() {
+
         bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
         bg.setLooping(true); // Set to loop if needed
         bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
         bg.play();
+
     }
 
     @Override
     public void render(float v) {
-
         batch.begin();
-        pausemenuSprite.draw(batch);
+            deathSprite.draw(batch);
         batch.end();
+
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
@@ -140,8 +134,8 @@ public class PauseMenu implements Screen {
 
     @Override
     public void dispose() {
-
-        pausemenu.dispose();
-        bg.stop();
+        deathtexture.dispose();
+        diedtexture.dispose();
+        stage.dispose();
     }
 }
