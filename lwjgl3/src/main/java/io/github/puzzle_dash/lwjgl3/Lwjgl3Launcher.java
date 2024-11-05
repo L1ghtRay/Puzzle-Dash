@@ -4,12 +4,12 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import io.github.puzzle_dash.PuzzleDashGame;
 
-/** Launches the desktop (LWJGL3) application. */
+// Launches the desktop (LWJGL3) application.
 public class Lwjgl3Launcher {
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setTitle("Puzzle Dash");
-        //config.setWindowedMode(1920, 1080);
+//        Set to Window Mode
         config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
         new Lwjgl3Application(new PuzzleDashGame(), config);
         config.useVsync(true);

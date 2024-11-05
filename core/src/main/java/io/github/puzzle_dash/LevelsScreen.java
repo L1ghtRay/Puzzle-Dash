@@ -5,9 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,10 +25,6 @@ public class LevelsScreen implements Screen {
     Sprite levelmenusprite;
     Texture levelmenuTexture;
     Stage stage;
-    //button sprite
-//    Sprite lvl_editbuttonsprite;
-//    Sprite backbuttonsprite;
-    //buttons
     private final Texture lvl_editbuttonTexture;
     private final Texture backbuttonTexture;
 
@@ -45,8 +39,6 @@ public class LevelsScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         lvl_editbuttonTexture = new Texture("level-editor-button.png");
-//        lvl_editbuttonsprite = new Sprite(lvl_editbuttonTexture);
-//        TextureRegion buttonRegion5 = new TextureRegion(lvl_editbuttonTexture);
         TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(lvl_editbuttonTexture);
         ImageButton button5 = new ImageButton(buttonDrawable5);
         button5.setSize(330, 83);
@@ -54,18 +46,16 @@ public class LevelsScreen implements Screen {
         button5.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //Gdx.app.log("Button", "Level Editor Button Clicked!");
                 System.out.println("Level Editor Button Clicked!");
                 bg.stop();
                 PuzzleDashGame game1 = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game1.setScreen(new LevelEditor(batch1));
                 dispose();
-                // Add code to start the game or transition to another screen
+
             }
         });
         backbuttonTexture = new Texture("back-button.png");
-//      backbuttonsprite = new Sprite(backbuttonTexture);
-//        TextureRegion buttonRegion6 = new TextureRegion(backbuttonTexture);
+
         TextureRegionDrawable buttonDrawable6 = new TextureRegionDrawable(backbuttonTexture);
         ImageButton button6 = new ImageButton(buttonDrawable6);
         button6.setSize(139, 83);
@@ -73,7 +63,7 @@ public class LevelsScreen implements Screen {
         button6.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //Gdx.app.log("Button", "Level Editor Button Clicked!");
+
                 System.out.println(" Back Button Clicked!");
                 bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
@@ -81,7 +71,7 @@ public class LevelsScreen implements Screen {
 
 
 
-                // Add code to start the game or transition to another screen
+
             }
         });
 
@@ -94,13 +84,13 @@ public class LevelsScreen implements Screen {
 
     @Override
     public void show() {
-        // Load the music file
+
         bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
         bg.setLooping(true); // Set to loop if needed
         bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
         bg.play(); // Start playing the music
 
-        // Initialize level resources if needed
+
     }
 
     @Override
