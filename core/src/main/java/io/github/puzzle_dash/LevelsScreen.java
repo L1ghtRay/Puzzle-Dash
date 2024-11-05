@@ -18,6 +18,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class LevelsScreen implements Screen {
     SpriteBatch batch1;
+
+
+
+
     Sprite levelmenusprite;
     Texture levelmenuTexture;
     Stage stage;
