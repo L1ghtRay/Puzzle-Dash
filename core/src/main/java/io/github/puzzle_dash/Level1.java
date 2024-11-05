@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -30,6 +33,9 @@ class Hud implements Disposable {
     float timeCount;
     Integer score;
 
+    float scoreIncrementTime; // Timer for score increment
+    private static final float SCORE_INCREMENT_INTERVAL = 1.0f; // Score increases every second
+
     Label countdownLabel;
     Label scoreLabel;
     Label timeLabel;
@@ -41,6 +47,8 @@ class Hud implements Disposable {
         worldTimer = 300;
         timeCount = 0;
         score = 0;
+
+        scoreIncrementTime = 0; // Initialize the timer
 
         viewport = new FitViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -69,10 +77,19 @@ class Hud implements Disposable {
 
     public void update(float dt) {
         timeCount += dt;
+        scoreIncrementTime += dt; // Increment the timer
+
         if (timeCount >= 1) {
             worldTimer--;
             countdownLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
+        }
+
+        // Increment score every SCORE_INCREMENT_INTERVAL seconds
+        if (scoreIncrementTime >= SCORE_INCREMENT_INTERVAL) {
+            score += 10; // Increase the score by 10 (or any amount you prefer)
+            scoreLabel.setText(String.format("%06d", score)); // Update the score label
+            scoreIncrementTime = 0; // Reset the timer
         }
     }
 
@@ -82,6 +99,7 @@ class Hud implements Disposable {
     }
 }
 
+//        Class
 public class Level1 implements Screen {
 
 
@@ -216,11 +234,36 @@ public class Level1 implements Screen {
         player.setCollisionLayer(collisionLayer);
 
 
-
+//        addNewElementsToEndOfMap();
         currentTextureIndex = 0;
         animationTimer = 0;
         System.out.println("Player initialized with animation");
     }
+//    public void addNewElementsToEndOfMap() {
+//        // Get the map layer where you want to add elements
+//        TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
+//
+//        // Calculate where the end of the map is (you can use map width or height)
+//        float mapWidth = collisionLayer.getWidth();
+//        float mapHeight = collisionLayer.getHeight();
+//
+//        // Add new object or element at the end of the map
+//        // Example: Adding a custom object (like an end portal or a special item)
+//        MapObject newObject = new RectangleMapObject();
+//        newObject.getProperties().put("x", mapWidth * collisionLayer.getTileWidth()-10000);
+//        newObject.getProperties().put("y", mapHeight * collisionLayer.getTileHeight()-10000);
+//        newObject.getProperties().put("width", 50);  // Size of the object
+//        newObject.getProperties().put("height", 50);
+//
+//        // Try to access the desired layer and add the object
+//        MapLayer layer = map.getLayers().get("fence-close.png");
+//        if (layer != null) {
+//            layer.getObjects().add(newObject);
+//        } else {
+//            System.out.println("Layer 'fence-openpng.png' does not exist!");
+//        }
+//    }
+
 
     // Debugging
 
