@@ -3,10 +3,17 @@ package io.github.puzzle_dash;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class CreditsScreen implements Screen {
 
@@ -14,18 +21,45 @@ public class CreditsScreen implements Screen {
     Texture creditsTexture;
     Sprite creditsSprite;
     TextScreen text;
-
+    Music bg;
+    private Stage stage;
+    private Texture backbuttonTexture;
     public CreditsScreen(SpriteBatch batch) {
         this.batch = batch;
 
         // Load background image
-        creditsTexture = new Texture("credits-bg.png");
+        creditsTexture = new Texture("credits.png");
         creditsSprite = new Sprite(creditsTexture);
         creditsSprite.setPosition(0, 0);
         creditsSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Initialize TextScreen with the batch to render text
         text = new TextScreen(batch);
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+        backbuttonTexture = new Texture("back-button.png"); // Use the correct variable name here
+        TextureRegionDrawable backButtonDrawable = new TextureRegionDrawable(backbuttonTexture);
+        ImageButton backButton = new ImageButton(backButtonDrawable);
+
+        // Set button position and size
+        backButton.setSize(150, 80);
+        backButton.setPosition(200, 200); // Adjust the position as needed
+
+        // Add listener for the back button
+        backButton.addListener(new ClickListener() {
+            @Override    public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Back to Main Menu Button Clicked!");
+                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game.setScreen(new MainMenuScreen(game));
+                dispose();
+            }
+        });
+
+        // Add the back button to the stage
+        stage.addActor(backButton);
+
+
+
     }
 
     @Override
@@ -49,10 +83,17 @@ public class CreditsScreen implements Screen {
         // End drawing
         batch.end();
         text.render();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     @Override
-    public void show() { }
+    public void show() {
+        bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
+        bg.setLooping(true); // Set to loop if needed
+        bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
+        bg.play();
+    }
 
     @Override
     public void resize(int width, int height) { }
@@ -70,5 +111,8 @@ public class CreditsScreen implements Screen {
     public void dispose() {
         creditsTexture.dispose();
         text.dispose();
+        stage.dispose();
+        backbuttonTexture.dispose();
+        bg.dispose();
     }
 }

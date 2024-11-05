@@ -2,8 +2,10 @@ package io.github.puzzle_dash;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -19,7 +21,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -44,7 +49,7 @@ class Hud implements Disposable {
         timeCount = 0;
         score = 0;
 
-        viewport = new StretchViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport(PuzzleDashGame.V_WIDTH, PuzzleDashGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
         Table table = new Table();
@@ -91,7 +96,7 @@ public class Level1 implements Screen {
     private int currentTextureIndex;
     private float animationTimer;
     private static final float FRAME_DURATION = 0.1f; // Time per frame in seconds
-
+    private Music bg;
     PuzzleDashGame game;
     Texture PauseTexture;
     OrthographicCamera camera;
@@ -103,6 +108,7 @@ public class Level1 implements Screen {
     Player player;
     OrthogonalTiledMapRenderer renderer;
     Stage stage;
+    boolean isPaused;
     private static final float PLAYER_SPEED = 100; // Regular speed
     private static final float DASH_SPEED = 300; // Dash speed
 
@@ -133,31 +139,30 @@ public class Level1 implements Screen {
         float speed = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? DASH_SPEED : PLAYER_SPEED;
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            player.setPosition(player.getX() + speed *4* dt, player.getY());
+            player.setPosition(player.getX() + speed * 4 * dt, player.getY());
             isMoving = true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            player.setPosition(player.getX() - speed *4* dt, player.getY());
+            player.setPosition(player.getX() - speed * 4 * dt, player.getY());
             isMoving = true;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             player.jump(); // Initiate jump
         }
-
+        isPaused=false;
         // Handle animation only if moving
         if (isMoving) {
             animationTimer += dt;
             if (animationTimer >= FRAME_DURATION) {
                 animationTimer = 0;
                 currentTextureIndex = (currentTextureIndex + 1) % playerTextures.length;
-                if(currentTextureIndex!=0)
+                if (currentTextureIndex != 0)
                     player.setRegion(playerTextures[currentTextureIndex]);
             }
         } else {
             player.setRegion(playerTextures[0]);
         }
     }
-
 
 
     public void update(float dt) {
@@ -169,12 +174,13 @@ public class Level1 implements Screen {
     }
 
 
-
     @Override
     public void render(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            bg.stop();
             PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-            game.setScreen(new MainMenuScreen(game));
+            game.setScreen(new PauseMenu(batch,Level1.this));
+
         }
 
         update(delta);
@@ -188,38 +194,42 @@ public class Level1 implements Screen {
 
         hud.stage.draw(); // Draw the HUD
     }
-
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
     }
 
 
+    @Override
+    public void show() {
+        playerTextures = new Texture[]{
+            new Texture("guy1.png"),
+            new Texture("guy2.png"),
+            new Texture("guy3.png"),
+            new Texture("guy4.png"),
+            new Texture("guy5.png"),
+            new Texture("guy6.png"),
+            new Texture("guy7.png")
+        };
 
-        @Override
-        public void show() {
-            playerTextures = new Texture[]{
-                new Texture("guy1.png"),
-                new Texture("guy2.png"),
-                new Texture("guy3.png"),
-                new Texture("guy4.png"),
-                new Texture("guy5.png"),
-                new Texture("guy6.png"),
-                new Texture("guy7.png")
-            };
+        // Initialize player with the first texture
+        player = new Player(new Sprite(playerTextures[0]));
+        player.setScale(2.0f, 2.0f);
 
-            // Initialize player with the first texture
-            player = new Player(new Sprite(playerTextures[0]));
-            player.setScale(2.0f, 2.0f);
+        TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
+        player.setPosition(450, 380);
+        player.setCollisionLayer(collisionLayer);
+        bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
+        bg.setLooping(true); // Set to loop if needed
+        bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
+        bg.play(); // Start playing the music
 
-            TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
-            player.setPosition(450,380);
-            player.setCollisionLayer(collisionLayer);
 
-            currentTextureIndex = 0;
-            animationTimer = 0;
-            System.out.println("Player initialized with animation");
-        }
+        currentTextureIndex = 0;
+        animationTimer = 0;
+        System.out.println("Player initialized with animation");
+    }
+
         // Debugging
 
 
@@ -239,5 +249,15 @@ public class Level1 implements Screen {
         renderer.dispose();
         hud.dispose();
         player.getTexture().dispose();
+        bg.dispose();
     }
+    public void resumeGame()
+    {
+        isPaused = false;
+    }
+    public void pausedGame()
+    {
+        isPaused=true;
+    }
+
 }

@@ -3,6 +3,7 @@ package io.github.puzzle_dash;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -21,6 +22,7 @@ public class LevelsScreen implements Screen {
 
 
 
+    private Music bg;
 
     Sprite levelmenusprite;
     Texture levelmenuTexture;
@@ -54,6 +56,7 @@ public class LevelsScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 //Gdx.app.log("Button", "Level Editor Button Clicked!");
                 System.out.println("Level Editor Button Clicked!");
+                bg.stop();
                 PuzzleDashGame game1 = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game1.setScreen(new LevelEditor(batch1));
                 dispose();
@@ -72,8 +75,10 @@ public class LevelsScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 //Gdx.app.log("Button", "Level Editor Button Clicked!");
                 System.out.println(" Back Button Clicked!");
+                bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new MainMenuScreen(game));
+
 
 
                 // Add code to start the game or transition to another screen
@@ -89,6 +94,12 @@ public class LevelsScreen implements Screen {
 
     @Override
     public void show() {
+        // Load the music file
+        bg = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
+        bg.setLooping(true); // Set to loop if needed
+        bg.setVolume(0.2f); // Set volume (0.0 to 1.0)
+        bg.play(); // Start playing the music
+
         // Initialize level resources if needed
     }
 
@@ -125,5 +136,6 @@ public class LevelsScreen implements Screen {
         levelmenuTexture.dispose();
         backbuttonTexture.dispose();
         lvl_editbuttonTexture.dispose();
+        bg.dispose();
     }
 }
