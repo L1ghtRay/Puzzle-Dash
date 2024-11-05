@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
+//        Class
 public class DeathScreen implements Screen {
     SpriteBatch batch;
     Texture deathtexture;
@@ -22,6 +22,7 @@ public class DeathScreen implements Screen {
     Sprite deathSprite;
     Music bg;
     Stage stage;
+//    Constructor
     DeathScreen(SpriteBatch batch){
 
         this.batch=batch;
@@ -32,7 +33,7 @@ public class DeathScreen implements Screen {
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-
+//        Death Texture
         diedtexture = new Texture("you-died-text.png");
         TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(diedtexture);
         ImageButton button1 = new ImageButton(buttonDrawable1);

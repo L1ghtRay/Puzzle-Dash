@@ -30,8 +30,7 @@ public class MainMenuScreen implements Screen
     private final Texture levelbuttonTexture;
     private final Texture creditsbuttonTexture;
     private final Texture exitbuttonTexture;
-    private final Texture settingsbuttonTexture;
-//    Music
+    //    Music
     private Music bg;
 
 //    Constructor
@@ -119,9 +118,10 @@ public class MainMenuScreen implements Screen
                 Gdx.app.exit(); // Exit the application
             }
         });
+
 //        Setting Icon
-        settingsbuttonTexture = new Texture("settings-icon.png");
-        TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(settingsbuttonTexture);
+        Texture setbuttonTexture = new Texture("settings-icon.png");
+        TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(setbuttonTexture);
         ImageButton button5= new ImageButton(buttonDrawable5);
         button5.setSize(88, 88);
         button5.setPosition(30, 970);
@@ -131,7 +131,7 @@ public class MainMenuScreen implements Screen
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Settings Button Clicked!");
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-                game.setScreen(new SettingsScreen(batch));
+                game.setScreen(new SettingsScreen(batch,1));
                 dispose();
             }
 

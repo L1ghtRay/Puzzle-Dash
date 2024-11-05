@@ -9,9 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -108,8 +105,6 @@ public class Level1 implements Screen {
     private float animationTimer;
     private static final float FRAME_DURATION = 0.1f; // Time per frame in seconds
     private Music bg;
-    PuzzleDashGame game;
-    Texture PauseTexture;
     OrthographicCamera camera;
     Viewport gamePort;
     Hud hud;
@@ -118,7 +113,6 @@ public class Level1 implements Screen {
     TiledMap map;
     Player player;
     OrthogonalTiledMapRenderer renderer;
-    Stage stage;
     boolean isPaused;
     private float savedPlayerX, savedPlayerY;
     private int savedTextureIndex;
@@ -137,6 +131,7 @@ public class Level1 implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map);
         camera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
     }
+
 
     public void handleInput(float dt) {
         boolean isMoving = false;
@@ -172,10 +167,13 @@ public class Level1 implements Screen {
     public void update(float dt) {
         handleInput(dt);
         hud.update(dt);
+
         camera.position.x = player.getX(); // Center the camera on the player
         camera.update();
         renderer.setView(camera);
+
     }
+
 
 
     @Override
@@ -239,32 +237,6 @@ public class Level1 implements Screen {
         animationTimer = 0;
         System.out.println("Player initialized with animation");
     }
-//    public void addNewElementsToEndOfMap() {
-//        // Get the map layer where you want to add elements
-//        TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
-//
-//        // Calculate where the end of the map is (you can use map width or height)
-//        float mapWidth = collisionLayer.getWidth();
-//        float mapHeight = collisionLayer.getHeight();
-//
-//        // Add new object or element at the end of the map
-//        // Example: Adding a custom object (like an end portal or a special item)
-//        MapObject newObject = new RectangleMapObject();
-//        newObject.getProperties().put("x", mapWidth * collisionLayer.getTileWidth()-10000);
-//        newObject.getProperties().put("y", mapHeight * collisionLayer.getTileHeight()-10000);
-//        newObject.getProperties().put("width", 50);  // Size of the object
-//        newObject.getProperties().put("height", 50);
-//
-//        // Try to access the desired layer and add the object
-//        MapLayer layer = map.getLayers().get("fence-close.png");
-//        if (layer != null) {
-//            layer.getObjects().add(newObject);
-//        } else {
-//            System.out.println("Layer 'fence-openpng.png' does not exist!");
-//        }
-//    }
-
-
     // Debugging
 
 

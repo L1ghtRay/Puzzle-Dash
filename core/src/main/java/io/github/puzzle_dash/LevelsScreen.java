@@ -35,7 +35,7 @@ public class LevelsScreen implements Screen {
 //        Stage
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-//        Level Editor Buuton
+//        Level Editor Button
         lvl_editbuttonTexture = new Texture("level-editor-button.png");
         TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(lvl_editbuttonTexture);
         ImageButton button5 = new ImageButton(buttonDrawable5);
