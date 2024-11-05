@@ -3,24 +3,24 @@ package io.github.puzzle_dash;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Sprite {
-    Vector2 velocity = new Vector2();
-    private float speed = 60 * 2, gravity = 60 * 1.8f;
-    float jumpSpeed = 300; // Set jump speed
-    public Rectangle boundingBox;
+     Vector2 velocity = new Vector2();
+     float speed = 60 * 2;
+     float gravity = 60 * 1.8f;
+     float jumpSpeed = 300; // Set jump speed
+     Rectangle boundingBox;
     private boolean isOnGround = false; // Track if player is on ground
-
     private TiledMapTileLayer collisionLayer;
 
     public Player(Sprite sprite) {
         super(sprite);
         boundingBox = new Rectangle(getX(), getY(), getWidth() - 229, getHeight() - 229);
     }
+
     @Override
     public void draw(Batch batch) {
         update(Gdx.graphics.getDeltaTime());
@@ -54,8 +54,19 @@ public class Player extends Sprite {
             checkCollisions(delta);
         }
 
-        // Check if the player is on the ground (you might need to adjust this condition)
-        isOnGround = getY() <= 140; // Adjust based on your map's ground level
+        // Continuously update isOnGround based on the collision layer
+        isOnGround = isStandingOnTile();
+    }
+
+    // New method to check if the player is standing on a tile
+    private boolean isStandingOnTile() {
+        // Check the tile directly beneath the player
+        int tileX = (int) ((getX() + boundingBox.width / 2) / collisionLayer.getTileWidth());
+        int tileY = (int) (getY() / collisionLayer.getTileHeight());
+
+        TiledMapTileLayer.Cell cellBelow = collisionLayer.getCell(tileX, tileY);
+
+        return cellBelow != null; // Player is on ground if there's a tile below
     }
 
     public void checkCollisions(float delta) {
@@ -110,7 +121,7 @@ public class Player extends Sprite {
 
     public void jump() {
         if (isOnGround) {
-            velocity.y = jumpSpeed-100;
+            velocity.y = jumpSpeed - 100;
             isOnGround = false; // Player is now in the air after jumping
         }
     }
