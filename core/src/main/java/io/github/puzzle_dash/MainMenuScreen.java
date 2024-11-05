@@ -1,5 +1,5 @@
 package io.github.puzzle_dash;
-
+//    Import Statements
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -14,30 +14,29 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+//    Class
 public class MainMenuScreen implements Screen
 {
+//    Instance Variables
     final PuzzleDashGame game;
     SpriteBatch batch;
-    // Sprites
+
     private final Sprite mainmenusprite;
-//    private final Sprite playbuttonsprite;
-//    private final Sprite levelbuttonsprite;
-//    private final Sprite creditsbuttonsprite;
-//    private final Sprite exitbuttonsprite;
     private final Texture mainmenuTexture;
-    private final Stage stage; // Stage for the button
-    // Buttons
+//    Stage for the button
+    private final Stage stage;
+//    Buttons
     private final Texture playbuttonTexture;
     private final Texture levelbuttonTexture;
     private final Texture creditsbuttonTexture;
     private final Texture exitbuttonTexture;
     private final Texture settingsbuttonTexture;
+//    Music
     private Music bg;
 
-
+//    Constructor
     MainMenuScreen(final PuzzleDashGame game) {
         this.game = game;
-
         mainmenuTexture = new Texture("main-menu.png");
         batch = new SpriteBatch();
 
@@ -45,16 +44,13 @@ public class MainMenuScreen implements Screen
         mainmenusprite.setPosition(0, 0);
         mainmenusprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        // Set up the stage and input processor
-
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
         // Play button texture
         playbuttonTexture = new Texture("play-button.png");
-//        playbuttonsprite = new Sprite(playbuttonTexture);
-//        TextureRegion buttonRegion1 = new TextureRegion(playbuttonTexture);
+
         TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(playbuttonTexture);
         ImageButton button1 = new ImageButton(buttonDrawable1);
         button1.setSize(149, 82);
