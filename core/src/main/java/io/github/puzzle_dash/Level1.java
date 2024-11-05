@@ -15,9 +15,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -90,7 +93,7 @@ public class Level1 implements Screen {
     private static final float FRAME_DURATION = 0.1f; // Time per frame in seconds
 
     PuzzleDashGame game;
-
+    Texture PauseTexture;
     OrthographicCamera camera;
     Viewport gamePort;
     Hud hud;
@@ -99,7 +102,7 @@ public class Level1 implements Screen {
     TiledMap map;
     Player player;
     OrthogonalTiledMapRenderer renderer;
-
+    Stage stage;
     private static final float PLAYER_SPEED = 100; // Regular speed
     private static final float DASH_SPEED = 300; // Dash speed
 
@@ -113,6 +116,16 @@ public class Level1 implements Screen {
         map = mapLoader.load("tutorial-room.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         camera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+//        stage = new Stage(new ScreenViewport());
+//        Gdx.input.setInputProcessor(stage);
+//        PauseTexture = new Texture("play-button.png");
+////        playbuttonsprite = new Sprite(playbuttonTexture);
+////        TextureRegion buttonRegion1 = new TextureRegion(playbuttonTexture);
+//        TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(PauseTexture);
+//        ImageButton button1 = new ImageButton(buttonDrawable1);
+//        button1.setSize(149, 82);
+//        button1.setPosition(885, 489);
+//        stage.addActor(button1);
     }
 
     public void handleInput(float dt) {
@@ -138,10 +151,10 @@ public class Level1 implements Screen {
                 animationTimer = 0;
                 currentTextureIndex = (currentTextureIndex + 1) % playerTextures.length;
                 if(currentTextureIndex!=0)
-                    player.setTexture(playerTextures[currentTextureIndex]);
+                    player.setRegion(playerTextures[currentTextureIndex]);
             }
         } else {
-            player.setTexture(playerTextures[0]);
+            player.setRegion(playerTextures[0]);
         }
     }
 
@@ -200,7 +213,7 @@ public class Level1 implements Screen {
             player.setScale(0.4f, 0.4f);
 
             TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
-            player.setPosition(570,280);
+            player.setPosition(450,380);
             player.setCollisionLayer(collisionLayer);
 
             currentTextureIndex = 0;
