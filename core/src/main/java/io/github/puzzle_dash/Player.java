@@ -10,8 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends Sprite {
      Vector2 velocity = new Vector2();
      float speed = 60 * 2;
-     float gravity = 60 * 1.8f;
-     float jumpSpeed = 300; // Set jump speed
+     float gravity = 300 * 1.8f;
+     float jumpSpeed = 500; // Set jump speed
      Rectangle boundingBox;
     private boolean isOnGround = false; // Track if player is on ground
     private TiledMapTileLayer collisionLayer;
