@@ -137,7 +137,8 @@ public class Level1 implements Screen {
             if (animationTimer >= FRAME_DURATION) {
                 animationTimer = 0;
                 currentTextureIndex = (currentTextureIndex + 1) % playerTextures.length;
-                player.setTexture(playerTextures[currentTextureIndex]);
+                if(currentTextureIndex!=0)
+                    player.setTexture(playerTextures[currentTextureIndex]);
             }
         } else {
             player.setTexture(playerTextures[0]);
@@ -185,6 +186,7 @@ public class Level1 implements Screen {
         @Override
         public void show() {
             playerTextures = new Texture[]{
+                new Texture("p1-removebg-preview.png"),
                 new Texture("p2-removebg-preview.png"),
                 new Texture("p3-removebg-preview.png"),
                 new Texture("p4-removebg-preview.png"),
