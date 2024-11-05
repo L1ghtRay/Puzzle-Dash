@@ -7,10 +7,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+//        Class
 public class LevelEditor implements Screen {
     SpriteBatch batch;
-    private Texture lvl_editortexture;
-    private Sprite lvl_editorSprite;
+    private final Texture lvl_editortexture;
+    private final Sprite lvl_editorSprite;
+
+//    Constructor
     LevelEditor(SpriteBatch batch) {
         this.batch=batch;
         lvl_editortexture = new Texture("credits.png");

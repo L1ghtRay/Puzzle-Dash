@@ -1,6 +1,7 @@
 package io.github.puzzle_dash;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 //        Class
 public class PauseMenu implements Screen {
     SpriteBatch batch;
-    Texture pausemenu;
+    Texture PauseMenu;
     Sprite pausemenuSprite;
     Stage stage;
     Texture resumetexture;
@@ -30,8 +31,8 @@ public class PauseMenu implements Screen {
 
         this.lvl1=lvl1;
         this.batch=batch;
-        pausemenu=new Texture("credits.png");
-        pausemenuSprite= new Sprite(pausemenu);
+        PauseMenu=new Texture("credits.png");
+        pausemenuSprite= new Sprite(PauseMenu);
         pausemenuSprite.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -110,6 +111,13 @@ public class PauseMenu implements Screen {
 
     @Override
     public void render(float v) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            bg.stop();
+            PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+            game.setScreen(new Level1(batch));
+
+
+        }
 
         batch.begin();
         pausemenuSprite.draw(batch);
@@ -142,7 +150,7 @@ public class PauseMenu implements Screen {
     @Override
     public void dispose() {
 
-        pausemenu.dispose();
-        bg.stop();
+        PauseMenu.dispose();
+        bg.dispose();
     }
 }
