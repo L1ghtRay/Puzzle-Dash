@@ -9,9 +9,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -118,14 +120,15 @@ public class Level1 implements Screen {
         float speed = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? DASH_SPEED : PLAYER_SPEED;
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            player.setPosition(player.getX() + speed * dt, player.getY());
+            player.setPosition(player.getX() + speed *4* dt, player.getY());
             isMoving = true;
-            System.out.println("Moving Right"); // Debugging
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            player.setPosition(player.getX() - speed * dt, player.getY());
+            player.setPosition(player.getX() - speed *4* dt, player.getY());
             isMoving = true;
-            System.out.println("Moving Left"); // Debugging
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            player.jump(); // Initiate jump
         }
 
         // Handle animation only if moving
@@ -137,10 +140,10 @@ public class Level1 implements Screen {
                 player.setTexture(playerTextures[currentTextureIndex]);
             }
         } else {
-            // Reset to first texture if not moving
             player.setTexture(playerTextures[0]);
         }
     }
+
 
 
     public void update(float dt) {
@@ -150,6 +153,8 @@ public class Level1 implements Screen {
         camera.update();
         renderer.setView(camera);
     }
+
+
 
     @Override
     public void render(float delta) {
@@ -176,30 +181,32 @@ public class Level1 implements Screen {
     }
 
 
-    @Override
-    public void show() {
-        playerTextures = new Texture[]{
-            new Texture("p2-removebg-preview.png"),
-            new Texture("p3-removebg-preview.png"),
-            new Texture("p4-removebg-preview.png"),
-            new Texture("p5-removebg-preview.png"),
-            new Texture("p6-removebg-preview.png"),
-            new Texture("p7-removebg-preview.png")
 
+        @Override
+        public void show() {
+            playerTextures = new Texture[]{
+                new Texture("p2-removebg-preview.png"),
+                new Texture("p3-removebg-preview.png"),
+                new Texture("p4-removebg-preview.png"),
+                new Texture("p5-removebg-preview.png"),
+                new Texture("p6-removebg-preview.png"),
+                new Texture("p7-removebg-preview.png")
+            };
 
+            // Initialize player with the first texture
+            player = new Player(new Sprite(playerTextures[0]));
+            player.setScale(0.4f, 0.4f);
 
-        };
+            TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
+            player.setPosition(570,280);
+            player.setCollisionLayer(collisionLayer);
 
-        // Initialize player with the first texture
-        player = new Player(new Sprite(playerTextures[0]));
-        player.setScale(0.4f, 0.4f);
-        player.setPosition(250, 140);
+            currentTextureIndex = 0;
+            animationTimer = 0;
+            System.out.println("Player initialized with animation");
+        }
+        // Debugging
 
-
-        currentTextureIndex = 0;
-        animationTimer = 0;
-        System.out.println("Player initialized with animation"); // Debugging
-    }
 
 
     @Override
@@ -219,6 +226,3 @@ public class Level1 implements Screen {
         player.getTexture().dispose();
     }
 }
-
-
-
