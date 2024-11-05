@@ -22,5 +22,10 @@ public class PuzzleDashGame extends Game {
     @Override
     public void dispose() {
         batch.dispose();
+
+
+
+
+
     }
 }
