@@ -83,11 +83,11 @@ class Hud2 implements Disposable {
         }
 
         // Increment score every SCORE_INCREMENT_INTERVAL seconds
-        if (scoreIncrementTime >= SCORE_INCREMENT_INTERVAL) {
-            score += 10; // Increase the score by 10 (or any amount you prefer)
-            scoreLabel.setText(String.format("%06d", score)); // Update the score label
-            scoreIncrementTime = 0; // Reset the timer
-        }
+//        if (scoreIncrementTime >= SCORE_INCREMENT_INTERVAL) {
+//            score += 10; // Increase the score by 10 (or any amount you prefer)
+//            scoreLabel.setText(String.format("%06d", score)); // Update the score label
+//            scoreIncrementTime = 0; // Reset the timer
+//        }
     }
 
     @Override
@@ -235,7 +235,7 @@ public class Level2 implements Screen {
         player2.setScale(2.0f, 2.0f);
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map2.getLayers().get("collision");
-        player2.setPosition(400, 320);
+        player2.setPosition(330, 320);
         player2.setCollisionLayer(collisionLayer);
 
 

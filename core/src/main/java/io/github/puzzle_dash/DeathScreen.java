@@ -69,7 +69,7 @@ public class DeathScreen implements Screen {
                 } else if (i==2) {
                     bg.stop();
                     PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-                    game.setScreen(new Level3(batch));
+                    game.setScreen(new Level2(batch));
                     dispose();
                 } else {
                     bg.stop();
