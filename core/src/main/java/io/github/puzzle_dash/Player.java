@@ -15,16 +15,18 @@ public class Player extends Sprite {
      float gravity = 300 * 2.8f;
      float jumpSpeed = 500; // Set jump speed
      Rectangle boundingBox;
+     int i;
     private boolean isOnGround = false; // Track if player is on ground
     private TiledMapTileLayer collisionLayer;
     Music bg;
     SpriteBatch batch;
 
-    public Player(Sprite sprite,Music bg) {
+    public Player(Sprite sprite,Music bg,int i) {
         super(sprite);
         this.bg=bg;
+        this.i=i;
         batch=new SpriteBatch();
-        boundingBox = new Rectangle(getX(), getY(), getWidth()-50 , getHeight());
+        boundingBox = new Rectangle(getX(), getY(), getWidth()-47 , getHeight());
     }
 
     @Override
@@ -67,7 +69,7 @@ public class Player extends Sprite {
         {
             bg.stop();
             PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-            game.setScreen(new DeathScreen(batch));
+            game.setScreen(new DeathScreen(batch,i));
         }
     }
 

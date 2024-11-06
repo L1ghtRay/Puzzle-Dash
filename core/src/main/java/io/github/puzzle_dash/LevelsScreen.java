@@ -35,6 +35,24 @@ public class LevelsScreen implements Screen {
 //        Stage
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+//        Level 1 preview
+        Texture lvl_1Texture = new Texture("level-preview-1.png");
+        TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(lvl_1Texture);
+        ImageButton button1 = new ImageButton(buttonDrawable1);
+        button1.setSize(289, 210);
+        button1.setPosition(427, 634);
+
+        button1.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Level1 Clicked!");
+                bg.stop();
+                PuzzleDashGame game1 = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game1.setScreen(new Level1(batch1));
+                dispose();
+
+            }
+        });
 //        Level Editor Button
         lvl_editbuttonTexture = new Texture("level-editor-button.png");
         TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(lvl_editbuttonTexture);
@@ -71,6 +89,7 @@ public class LevelsScreen implements Screen {
             }
         });
 
+        stage.addActor(button1);
         stage.addActor(button5);
         stage.addActor(button6);
     }
