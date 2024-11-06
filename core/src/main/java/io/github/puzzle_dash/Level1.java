@@ -28,7 +28,7 @@ class Hud implements Disposable {
 
     Integer worldTimer;
     float timeCount;
-    Integer score;
+    int score;
 
     float scoreIncrementTime; // Timer for score increment
     private static final float SCORE_INCREMENT_INTERVAL = 1.0f; // Score increases every second
@@ -161,6 +161,7 @@ public class Level1 implements Screen {
         else {
             player.setRegion(playerTextures[0]);
         }
+
     }
 
 
@@ -189,6 +190,7 @@ public class Level1 implements Screen {
             PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
             game.setScreen(new Level1(batch));
         }
+
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
