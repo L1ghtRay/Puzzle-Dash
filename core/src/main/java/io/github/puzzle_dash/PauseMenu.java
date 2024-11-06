@@ -48,7 +48,7 @@ public class PauseMenu implements Screen {
         button1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Start Game Button Clicked!");
+                System.out.println("Resume Button Clicked!");
                 bg.stop();
                 lvl1.resumeGame();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
@@ -85,7 +85,7 @@ public class PauseMenu implements Screen {
         button3.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Open Credits Button Clicked!");
+                System.out.println("Quit Button Clicked!");
                 bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                 game.setScreen(new MainMenuScreen(game));

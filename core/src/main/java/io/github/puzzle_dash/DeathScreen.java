@@ -62,11 +62,17 @@ public class DeathScreen implements Screen {
                 System.out.println("Restart Button Clicked!");
                 bg.stop();
                 if(i==1) {
+                    bg.stop();
                     PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                     game.setScreen(new Level1(batch));
                     dispose();
-                }
-                else {
+                } else if (i==2) {
+                    bg.stop();
+                    PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                    game.setScreen(new Level3(batch));
+                    dispose();
+                } else {
+                    bg.stop();
                     PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
                     game.setScreen(new Level3(batch));
                     dispose();
