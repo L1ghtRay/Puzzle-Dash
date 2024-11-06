@@ -21,6 +21,11 @@ public class Player extends Sprite {
     Music bg;
     SpriteBatch batch;
 
+
+
+
+
+
     public Player(Sprite sprite,Music bg,int i) {
         super(sprite);
         this.bg=bg;
