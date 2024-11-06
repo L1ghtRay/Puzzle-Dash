@@ -83,11 +83,11 @@ class Hud3 implements Disposable {
         }
 
         // Increment score every SCORE_INCREMENT_INTERVAL seconds
-        if (scoreIncrementTime >= SCORE_INCREMENT_INTERVAL) {
-            score += 10; // Increase the score by 10 (or any amount you prefer)
-            scoreLabel.setText(String.format("%06d", score)); // Update the score label
-            scoreIncrementTime = 0; // Reset the timer
-        }
+//        if (scoreIncrementTime >= SCORE_INCREMENT_INTERVAL) {
+//            score += 10; // Increase the score by 10 (or any amount you prefer)
+//            scoreLabel.setText(String.format("%06d", score)); // Update the score label
+//            scoreIncrementTime = 0; // Reset the timer
+//        }
     }
 
     @Override

@@ -86,11 +86,11 @@ class Hud implements Disposable {
         }
 
         // Increment score every SCORE_INCREMENT_INTERVAL seconds
-        if (scoreIncrementTime >= SCORE_INCREMENT_INTERVAL) {
-            score += 10; // Increase the score by 10 (or any amount you prefer)
-            scoreLabel.setText(String.format("%06d", score)); // Update the score label
-            scoreIncrementTime = 0; // Reset the timer
-        }
+//        if (scoreIncrementTime >= SCORE_INCREMENT_INTERVAL) {
+//            score += 10; // Increase the score by 10 (or any amount you prefer)
+//            scoreLabel.setText(String.format("%06d", score)); // Update the score label
+//            scoreIncrementTime = 0; // Reset the timer
+//        }
     }
 
     @Override
@@ -211,6 +211,9 @@ public class Level1 implements Screen {
         isOnYellow = player.getBoundingRectangle().overlaps(yellowButtonBounds);
         if (isOnYellow && !isOnYellow2) {
             System.out.println("Yellow Button Pressed");
+            bg.stop();
+            PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+            game.setScreen(new Level2(batch));
             isOnYellow2 = isOnYellow;
         } else if (!isOnYellow && isOnYellow2) {
             System.out.println("Yellow Button Released");
