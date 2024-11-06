@@ -23,7 +23,7 @@ public class SettingsScreen implements Screen {
     private final Slider volumeSlider;
     private final BitmapFont font;
     private final BitmapFont customFont;
-    private final int[] leaderboardScores = {100, 80, 60, 40}; // Default leaderboard scores
+    private static int[] leaderboardScores = {100, 80, 60, 40}; // Default leaderboard scores
 
     // Constructor with score parameter
     public SettingsScreen(SpriteBatch batch, int score) {
@@ -63,7 +63,7 @@ public class SettingsScreen implements Screen {
         updateLeaderboardScores(score);
     }
 
-    private void updateLeaderboardScores(int score) {
+    public static void updateLeaderboardScores(int score) {
         // Example logic: replace the lowest score if the new score is higher
         for (int i = 0; i < leaderboardScores.length; i++) {
             if (score > leaderboardScores[i]) {

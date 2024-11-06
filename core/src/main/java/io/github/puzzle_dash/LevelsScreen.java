@@ -39,8 +39,8 @@ public class LevelsScreen implements Screen {
         Texture lvl_1Texture = new Texture("level-preview-1.png");
         TextureRegionDrawable buttonDrawable1 = new TextureRegionDrawable(lvl_1Texture);
         ImageButton button1 = new ImageButton(buttonDrawable1);
-        button1.setSize(289, 210);
-        button1.setPosition(427, 634);
+        button1.setSize(424, 308);
+        button1.setPosition(194, 433);
 
         button1.addListener(new ClickListener() {
             @Override
@@ -53,6 +53,43 @@ public class LevelsScreen implements Screen {
 
             }
         });
+//        Level 2
+        Texture lvl_2Texture = new Texture("level-preview-2.png");
+        TextureRegionDrawable buttonDrawable2 = new TextureRegionDrawable(lvl_2Texture);
+        ImageButton button2 = new ImageButton(buttonDrawable2);
+        button2.setSize(424, 308);
+        button2.setPosition(750, 433);
+
+        button2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Level2 Clicked!");
+                bg.stop();
+                PuzzleDashGame game1 = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game1.setScreen(new Level2(batch1));
+                dispose();
+
+            }
+        });
+//        Level 3
+        Texture lvl_3Texture = new Texture("level-preview-3.png");
+        TextureRegionDrawable buttonDrawable3 = new TextureRegionDrawable(lvl_3Texture);
+        ImageButton button3 = new ImageButton(buttonDrawable3);
+        button3.setSize(424, 308);
+        button3.setPosition(1312, 433);
+
+        button3.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Level2 Clicked!");
+                bg.stop();
+                PuzzleDashGame game1 = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                game1.setScreen(new Level3(batch1));
+                dispose();
+
+            }
+        });
+
 //        Level Editor Button
         lvl_editbuttonTexture = new Texture("level-editor-button.png");
         TextureRegionDrawable buttonDrawable5 = new TextureRegionDrawable(lvl_editbuttonTexture);
@@ -90,6 +127,8 @@ public class LevelsScreen implements Screen {
         });
 
         stage.addActor(button1);
+        stage.addActor(button2);
+        stage.addActor(button3);
         stage.addActor(button5);
         stage.addActor(button6);
     }
