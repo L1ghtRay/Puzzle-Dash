@@ -60,7 +60,7 @@ public class MainMenuScreen implements Screen
                 System.out.println("Start Game Button Clicked!");
                 bg.stop();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-                game.setScreen(new Level3(batch));
+                game.setScreen(new Level2(batch));
                 dispose();
             }
         });
