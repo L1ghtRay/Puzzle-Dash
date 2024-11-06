@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -21,6 +22,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.awt.*;
 
 class Hud implements Disposable {
     public Stage stage;
@@ -99,12 +102,19 @@ class Hud implements Disposable {
 //        Class
 public class Level1 implements Screen {
 
-
     private Texture[] playerTextures;
     private int currentTextureIndex;
     private float animationTimer;
     private static final float FRAME_DURATION = 0.1f; // Time per frame in seconds
     private Music bg;
+    Sprite whiteButtonSprite;
+    Rectangle whiteButtonBounds;
+    Sprite redButtonSprite;
+    Rectangle redButtonBounds;
+    Sprite yellowButtonSprite;
+    Rectangle yellowButtonBounds;
+    Sprite blueButtonSprite;
+    Rectangle blueButtonBounds;
     OrthographicCamera camera;
     Viewport gamePort;
     Hud hud;
@@ -114,6 +124,14 @@ public class Level1 implements Screen {
     Player player;
     OrthogonalTiledMapRenderer renderer;
     boolean isPaused;
+    boolean isOnWhite;
+    boolean isOnWhite2 = false;
+    boolean isOnRed;
+    boolean isOnRed2 = false;
+    boolean isOnYellow;
+    boolean isOnYellow2 = false;
+    boolean isOnBlue;
+    boolean isOnBlue2 = false;
     private float savedPlayerX, savedPlayerY;
     private int savedTextureIndex;
     private float savedAnimationTimer;
@@ -169,6 +187,42 @@ public class Level1 implements Screen {
         handleInput(dt);
         hud.update(dt);
 
+        isOnWhite = player.getBoundingRectangle().overlaps(whiteButtonBounds);
+        if (isOnWhite && !isOnWhite2) {
+            System.out.println("White Button Pressed");
+            isOnWhite2 = isOnWhite;
+        } else if (!isOnWhite && isOnWhite2) {
+            System.out.println("White Button Released");
+            isOnWhite2 = isOnWhite;
+        }
+
+        isOnRed = player.getBoundingRectangle().overlaps(redButtonBounds);
+        if (isOnRed && !isOnRed2) {
+            System.out.println("Red Button Pressed");
+            isOnRed2 = isOnRed;
+        } else if (!isOnRed && isOnRed2) {
+            System.out.println("Red Button Released");
+            isOnRed2 = isOnRed;
+        }
+
+        isOnYellow = player.getBoundingRectangle().overlaps(yellowButtonBounds);
+        if (isOnYellow && !isOnYellow2) {
+            System.out.println("Yellow Button Pressed");
+            isOnYellow2 = isOnYellow;
+        } else if (!isOnYellow && isOnYellow2) {
+            System.out.println("Yellow Button Released");
+            isOnYellow2 = isOnYellow;
+        }
+
+        isOnBlue = player.getBoundingRectangle().overlaps(blueButtonBounds);
+        if (isOnBlue && !isOnBlue2) {
+            System.out.println("Blue Button Pressed");
+            isOnBlue2 = isOnBlue;
+        } else if (!isOnBlue && isOnBlue2) {
+            System.out.println("Blue Button Released");
+            isOnBlue2 = isOnBlue;
+        }
+
         camera.position.x = player.getX(); // Center the camera on the player
         camera.update();
         renderer.setView(camera);
@@ -197,6 +251,10 @@ public class Level1 implements Screen {
 
         renderer.render();
         renderer.getBatch().begin();
+        whiteButtonSprite.draw(renderer.getBatch());
+        redButtonSprite.draw(renderer.getBatch());
+        yellowButtonSprite.draw(renderer.getBatch());
+        blueButtonSprite.draw(renderer.getBatch());
         player.draw(renderer.getBatch()); // Directly draw the player
         renderer.getBatch().end();
 
@@ -233,6 +291,45 @@ public class Level1 implements Screen {
         player.setPosition(450, 380);
         player.setCollisionLayer(collisionLayer);
 
+        Texture whiteButtonTexture = new Texture("simon-says-button-4-1.png");  // Add your button texture
+        whiteButtonSprite = new Sprite(whiteButtonTexture);
+        whiteButtonSprite.setPosition(2900, 320);  // Position it within the map
+        whiteButtonBounds = new Rectangle(
+            (int)whiteButtonSprite.getX(),
+            (int)whiteButtonSprite.getY(),
+            (int)whiteButtonSprite.getWidth(),
+            (int)whiteButtonSprite.getHeight()
+        );
+
+        Texture redButtonTexture = new Texture("simon-says-button-1-1.png");  // Add your button texture
+        redButtonSprite = new Sprite(redButtonTexture);
+        redButtonSprite.setPosition(3000, 320);  // Position it within the map
+        redButtonBounds = new Rectangle(
+            (int)redButtonSprite.getX(),
+            (int)redButtonSprite.getY(),
+            (int)redButtonSprite.getWidth(),
+            (int)redButtonSprite.getHeight()
+        );
+
+        Texture blueButtonTexture = new Texture("simon-says-button-2-1.png");  // Add your button texture
+        blueButtonSprite = new Sprite(blueButtonTexture);
+        blueButtonSprite.setPosition(3050, 320);  // Position it within the map
+        blueButtonBounds = new Rectangle(
+            (int)blueButtonSprite.getX(),
+            (int)blueButtonSprite.getY(),
+            (int)blueButtonSprite.getWidth(),
+            (int)blueButtonSprite.getHeight()
+        );
+
+        Texture yellowButtonTexture = new Texture("simon-says-button-3-1.png");  // Add your button texture
+        yellowButtonSprite = new Sprite(yellowButtonTexture);
+        yellowButtonSprite.setPosition(3100, 320);  // Position it within the map
+        yellowButtonBounds = new Rectangle(
+            (int)yellowButtonSprite.getX(),
+            (int)yellowButtonSprite.getY(),
+            (int)yellowButtonSprite.getWidth(),
+            (int)yellowButtonSprite.getHeight()
+        );
 
 //        addNewElementsToEndOfMap();
         currentTextureIndex = 0;
