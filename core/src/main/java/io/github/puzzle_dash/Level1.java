@@ -115,6 +115,9 @@ public class Level1 implements Screen {
     Rectangle yellowButtonBounds;
     Sprite blueButtonSprite;
     Rectangle blueButtonBounds;
+    Sprite redLightSprite;
+    Sprite blueLightSprite;
+    Sprite yellowLightSprite;
     OrthographicCamera camera;
     Viewport gamePort;
     Hud hud;
@@ -255,6 +258,9 @@ public class Level1 implements Screen {
         redButtonSprite.draw(renderer.getBatch());
         yellowButtonSprite.draw(renderer.getBatch());
         blueButtonSprite.draw(renderer.getBatch());
+        redLightSprite.draw(renderer.getBatch());
+        blueLightSprite.draw(renderer.getBatch());
+        yellowLightSprite.draw(renderer.getBatch());
         player.draw(renderer.getBatch()); // Directly draw the player
         renderer.getBatch().end();
 
@@ -330,6 +336,18 @@ public class Level1 implements Screen {
             (int)yellowButtonSprite.getWidth(),
             (int)yellowButtonSprite.getHeight()
         );
+
+        Texture redLightTexture = new Texture("simon-says-light-1-1.png");  // Add your button texture
+        redLightSprite = new Sprite(redLightTexture);
+        redLightSprite.setPosition(3000, 470);  // Position it within the map
+
+        Texture blueLightTexture = new Texture("simon-says-light-2-1.png");  // Add your button texture
+        blueLightSprite = new Sprite(blueLightTexture);
+        blueLightSprite.setPosition(3050, 470);  // Position it within the map
+
+        Texture yellowLightTexture = new Texture("simon-says-light-3-1.png");  // Add your button texture
+        yellowLightSprite = new Sprite(yellowLightTexture);
+        yellowLightSprite.setPosition(3100, 470);  // Position it within the map
 
 //        addNewElementsToEndOfMap();
         currentTextureIndex = 0;
