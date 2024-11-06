@@ -22,10 +22,12 @@ public class DeathScreen implements Screen {
     Sprite deathSprite;
     Music bg;
     Stage stage;
+    int i;
 //    Constructor
-    DeathScreen(SpriteBatch batch){
+    DeathScreen(SpriteBatch batch,int i){
 
         this.batch=batch;
+        this.i=i;
         deathtexture = new Texture("death-overlay.png");
         deathSprite = new Sprite(deathtexture);
         deathSprite.setPosition(0,0);
@@ -59,9 +61,17 @@ public class DeathScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Restart Button Clicked!");
                 bg.stop();
-                PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-                game.setScreen(new Level1(batch));
-                dispose();
+                if(i==1) {
+                    PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                    game.setScreen(new Level1(batch));
+                    dispose();
+                }
+                else {
+                    PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+                    game.setScreen(new Level2(batch));
+                    dispose();
+
+                }
             }
         });
 

@@ -224,7 +224,7 @@ public class Level1 implements Screen {
         bg.play(); // Start playing the music
 
         // Initialize player with the first texture
-        player = new Player(new Sprite(playerTextures[0]),bg);
+        player = new Player(new Sprite(playerTextures[0]),bg,1);
         player.setScale(2.0f, 2.0f);
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get("layer3");
