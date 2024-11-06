@@ -16,23 +16,22 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 //        Class
 public class PauseMenu implements Screen {
     SpriteBatch batch;
-    Texture PauseMenu;
+    Texture PauseMen;
     Sprite pausemenuSprite;
     Stage stage;
     Texture resumetexture;
     Texture restarttexture;
     Texture quittexture;
-    Level1 lvl1;
+    Level1 level1;
     Music bg;
 
 //    Constructor
-    PauseMenu(SpriteBatch batch, Level1 lvl1)
+public PauseMenu(SpriteBatch batch, Level1 lvl1)
     {
-
-        this.lvl1=lvl1;
+        this.level1=lvl1;
         this.batch=batch;
-        PauseMenu=new Texture("credits.png");
-        pausemenuSprite= new Sprite(PauseMenu);
+        PauseMen =new Texture("credits.png");
+        pausemenuSprite= new Sprite(PauseMen);
         pausemenuSprite.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -50,9 +49,9 @@ public class PauseMenu implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Resume Button Clicked!");
                 bg.stop();
-                lvl1.resumeGame();
+                level1.resumeGame();
                 PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-                game.setScreen(lvl1);
+                game.setScreen(level1);
                 dispose();
             }
         });
@@ -150,7 +149,7 @@ public class PauseMenu implements Screen {
     @Override
     public void dispose() {
 
-        PauseMenu.dispose();
+        PauseMen.dispose();
         bg.dispose();
     }
 }
