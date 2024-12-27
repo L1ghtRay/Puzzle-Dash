@@ -96,13 +96,6 @@ class Hud3 implements Disposable {
     }
 }
 
-
-
-
-
-
-
-
 //        Class
 public class Level3 implements Screen {
 
@@ -194,7 +187,7 @@ public class Level3 implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             bg.stop();
             PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-            game.setScreen(new Level2(batch));
+            game.setScreen(new Level3(batch));
         }
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -231,7 +224,7 @@ public class Level3 implements Screen {
         bg.play(); // Start playing the music
 
         // Initialize player with the first texture
-        player2 = new Player(new Sprite(playerTextures[0]),bg,2);
+        player2 = new Player(new Sprite(playerTextures[0]),bg,3);
         player2.setScale(2.0f, 2.0f);
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map2.getLayers().get("collision");

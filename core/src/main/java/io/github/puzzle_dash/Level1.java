@@ -212,11 +212,13 @@ public class Level1 implements Screen {
         if (isOnYellow && !isOnYellow2) {
             System.out.println("Yellow Button Pressed");
             bg.stop();
-            PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
-            game.setScreen(new Level2(batch));
+
             isOnYellow2 = isOnYellow;
         } else if (!isOnYellow && isOnYellow2) {
             System.out.println("Yellow Button Released");
+            bg.stop();
+            PuzzleDashGame game = (PuzzleDashGame) Gdx.app.getApplicationListener();
+            game.setScreen(new Level2(batch));
             isOnYellow2 = isOnYellow;
         }
 
